@@ -1,0 +1,30 @@
+<p>
+    The parasite script is the main script in charge for your development and deployment process.
+</p>
+<p>
+    It mainly uses the Gulp build system in order to perform its tasks.
+</p>
+<p>
+    Running <code>parasite</code> or <code>parasite --help</code> will display all of the available options.
+</p>
+<p>
+    The flow of the development process is as follows:
+    <ol>
+        <li>
+            <code>parasite dev</code>: you should run this in the background in order to support the development environment.
+            If you prefer, you can use <code>parasite dev-server</code>, which also runs the server
+            (if you use an IDE capable of running the server, it'll be more convenient using the IDE, as you can debug the server side code using breakpoints).
+        </li>
+        <li>
+            <code>parasite test</code>: you can run the tests any time you wish.
+        </li>
+        <li>
+            <p>
+                <code>parasite deploy</code>: deploy the master branch into the production parasite server.
+                At the end of the deployment process, if all goes well (pulling the code in parasite, building, running tests),
+                the <code>deploy</code> script is run. You should put there any code which should execute in order to update
+                the server.
+            </p>
+        </li>
+    </ol>
+</p>

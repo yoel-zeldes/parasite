@@ -1,0 +1,34 @@
+<p>
+    Every application should have its own package located under src/parasite/applications.
+    <br />
+    This package is automatically imported - so you must provide a __init__.py file which either implements the REST API, or makes sure to import them from a views.py file for instance.
+</p>
+<p>
+    The convention is to put all of the REST API implementation code (connecting URLs to python functions which return JSON) in views.py, and to have in __init__.py <code>from views import *</code>.
+</p>
+<p>
+    If importing the package fails (e.g. your code throws an exception), parasite prints an error to the console and continues.
+</p>
+<p>
+    The application package is imported once per process. On your development computer there should be only one process, but on the parasite production server there are several.
+    <br />
+    For this reason, we provided the <code>init</code> object inside the <code>parasite.applications</code> package.
+    <br />
+    The <code>init</code> object gives you the ability to register functions to be executed only once - no matter how many processes there are.
+    <br />
+    This is done in the following way:
+    <pre>
+from parasite.applications import init
+def application_initialization_heavy_operation():
+    ...
+
+init.register("APP_NAME", application_initialization_heavy_operation)
+    </pre>
+</p>
+<p>
+    If it's important for your application (or from performance perspective) to run a specific function only once,
+    register it using <code>init</code> instead of executing it in the __init__.py file.
+</p>
+<p>
+    The production parasite server runs the code you register using <dev-a dev-ref="/deployment/supervisord">supervisord</dev-a>.
+</p>

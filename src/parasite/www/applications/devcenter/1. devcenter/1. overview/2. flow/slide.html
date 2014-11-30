@@ -1,0 +1,63 @@
+Parasite supports two kinds of logic flow approaches:
+
+<dl>
+    <dt>
+        Callbacks
+    </dt>
+    <dd>
+        <p>
+            Some parts of the framework are callbacks-based.
+            This means that as a developer using the framework you're supposed to implement a predefined callback functions which parasite knows when to call.
+        </p>
+        <p>
+            Although this kind of logic flow may be hard to understand for new developers, it's enough to understand what callbacks you should supply in order to make the whole site works.
+        </p>
+        <p>
+            E.g. the application object provides a <code>getNavigationModel</code> callback.
+            <br />
+            All you need to know is that this function should return the navigation model used by your application - this model is the items which the user can navigate through.
+        </p>
+        <p>
+            You don't need to call this function yourself - parasite knows when to call it, how to link the state between the current item inside the model the user is watching to the URL, etc.
+        </p>
+    </dd>
+
+    <dt>
+        Free style
+    </dt>
+    <dd>
+        <p>
+            The drawback of the callbacks approach is that it may limit you - what if your application has to do something not supported by an appropriate callback?
+        </p>
+        <p>
+            For cases like this, parasite supports the free style logic flow:
+            <br />
+            In this flow, there isn't really a flow :)
+        </p>
+        <p>
+            The applications are accessible to the user by means of plugins.
+            <br />
+            There are navigation plugins and content plugins. When you'll learn how to implement them you'll understand that basically a plugin is an HTML file and controllers defined in a js file.
+        </p>
+        <p>
+            The contents of these files isn't restricted at all. There isn't a restriction for making you implement navigation-related code in a navigation plugin for instance. You SHOULD write such navigation-related code, but there isn't a restriction.
+        </p>
+        <p>
+            For this reason, you can write whatever you want. There's no limit to what you can accomplish here - the callbacks don't limit you
+        </p>
+    </dd>
+</dl>
+
+<h4>
+    Conclusion
+</h4>
+<p>
+    Using these two approaches give you the opportunity to write whatever application you want:
+    <br />
+    Implementing the basic callbacks will result in a working and beautiful application.
+    <br />
+    For advanced use cases not supported by the callbacks you can write whatever you want in the plugins.
+    <br />
+    There are some concepts that your application can't really break if it wants to get the benefits of the parasite core, e.g. the navigation model must be a tree structure.
+    If your application would like to have a list-like model - it'll have to simulate it using a tree (one node with many children).
+</p>

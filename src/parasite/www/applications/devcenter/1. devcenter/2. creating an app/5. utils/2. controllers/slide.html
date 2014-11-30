@@ -1,0 +1,107 @@
+<p>
+    There are two kinds of controllers provided by the utils library: navigation controllers and content controllers.
+    <br />
+    These should be used inside of the plugin's html contents.
+</p>
+
+<dl>
+    <dt>
+        Navigation controllers
+    </dt>
+    <dd>
+        <p>
+            The utils library provides the <code>window.utils.BaseNavigationCtrl</code> object.
+        </p>
+        <p>
+            In order to use it, one should extend it in the following manner:
+        </p>
+        <pre>
+angular.module("amazingViews")
+.controller("AmazingNavigationCtrl", ['$scope', 'Navigation', 'Plugins', utils.BaseNavigationCtrl.extend({
+	init : function($scope, Navigation, Plugins) {
+		this._super($scope, Navigation, Plugins);
+		...
+	}
+})]);
+        </pre>
+        <p>
+            Notice that we use the <code>class.js</code> library in order to create class-like objects.
+            <br />
+            When extending such a class, the <code>init</code> function is the constructor, and it can call <code>_super</code> in order to call to the parent's constructor.
+            <br />
+            In our case, BaseNavigationCtrl's constructor should be called with $scope, Navigation and Plugins.
+            <br />
+            If your class needs more parameters (injected by angular's DI), it's a good convention to define them after the parameters needed by <code>BaseNavigationCtrl</code>.
+        </p>
+        <p>
+            <code>BaseNavigationCtrl</code> provides the following API:
+            <ul>
+                <li>
+                    <code>navigateTo(node, canHandleCallback, cantHandleCallback)</code>:
+                    <br />
+                    Change the current navigation node to the given node.
+                    After changing it, the current navigation plugin's <code>canHandle</code> function is called in order to test if it can handle the new node.
+                    The appropriate callback is then called (unless it's undefined).
+                </li>
+            </ul>
+        </p>
+    </dd>
+
+    <dt>
+        Content controllers
+    </dt>
+    <dd>
+        <p>
+            The utils library provides the <code>window.utils.BaseContentCtrl</code> object.
+        </p>
+        <p>
+            In order to use it, one should extend it in the following manner:
+        </p>
+        <pre>
+angular.module("amazingViews")
+.controller("AmazingContentCtrl", ['$scope', '$interval', 'Navigation', 'Plugins', utils.BaseContentCtrl.extend({
+	init : function($scope, $interval, Navigation, Plugins) {
+		this._super($scope, $interval, Navigation, Plugins);
+		...
+	}
+})]);
+        </pre>
+        <p>
+            As was done with <code>BaseNavigationCtrl</code>, the <code>BaseContentCtrl</code> is extended, and the needed arguments are passed to its constructor.
+        </p>
+        <p>
+            <code>BaseContentCtrl</code> provides the following API:
+            <ul>
+                <li>
+                    <code>$scope</code>:
+                    <br />
+                    The <code>$scope</code> argument passed to the constructor is saved as a property of the object.
+                </li>
+                <li>
+                    <code>$scope.item</code>:
+                    <br />
+                    <code>BaseContentCtrl</code> makes sure that in any given time, <code>$scope.item</code> holds the item of the current navigation node (or an empty object - <code>{}</code> - in case the current navigation node's item is <code>null</code>).
+                    <br />
+                    Using <code>Navigation.currentNavigationItem().item</code> instead isn't recommended, as little details are taken care of by BaseContentCtrl for you.
+                </li>
+                <li>
+                    <code>refreshModel()</code>:
+                    <br />
+                    This function is a callback called automatically by <code>BaseContentCtrl</code> at predefined times - once a minute, and whenever the current navigation node changes.
+                    <br />
+                    The user can override this function (which by default does nothing) in order to make updates to <code>$scope.item</code>. This supports two design patterns:
+                    <ul>
+                        <li>
+                            An implementation could go to the server, pull the item's updated data, and fill the item with this data. This way, the item will keep getting updated while the user is viewing it.
+                        </li>
+                        <li>
+                            Another use case is deferring heavy operations of filling items' data to whenever the user views them.
+                            This way, when the application is constructing the navigation model (or part of it), it doesn't have to fill in the items' data.
+                            It could wait until the user navigates to the item, and only then pull the data from the server.
+                            This way, the model construction process can be fast
+                        </li>
+                </li>
+            </ul>
+        </p>
+    </dd>
+</dl>

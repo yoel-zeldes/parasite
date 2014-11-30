@@ -1,0 +1,20 @@
+<div class="modal-header">
+    <button type="button" class="close" aria-hidden="true" ng-click="$dismiss()">×</button>
+    <h3>{{ msg || 'Login' }}</h3>
+</div>
+<div class="modal-body">
+    <form name="form" class="form-horizontal">
+        <div class="control-group">
+            <label class="control-label" for="inputUserName">
+                User name:
+            </label>
+            <div class="controls">
+                <input id="inputUserName" type="text" class="input-large" ng-model="newUserName" required />
+            </div>
+        </div>
+    </form>
+</div>
+<div class="modal-footer">
+    <button class="btn" aria-hidden="true" ng-click="$dismiss()">Cancel</button>
+    <button class="btn btn-primary" ng-click="$close(newUserName)" ng-disabled="!form.$valid">Login</button>
+</div>

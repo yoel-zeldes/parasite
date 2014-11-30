@@ -1,0 +1,36 @@
+<p>
+    The utils library contains basic plugin objects which can be extended in order to create a new plugin.
+</p>
+<p>
+    These live in the <code>UtilsPlugins</code> provider (under the <code>utils</code> module)
+</p>
+<p>
+    The following plugins are provided:
+</p>
+<dl>
+    <dt>
+        LimitedKidsPlugin
+    </dt>
+    <dd>
+        <p>
+            This plugin should be used by plugins that can't support too many kids:
+        </p>
+        <p>
+            <code>canHandle</code> is implemented by this plugin in a way that tests if the current node's number of kids exceeds the limit (by default: 1000).
+        </p>
+        <p>
+            If the limit is exceeded, canHandle returns false, and as stated in <dev-a dev-ref="/creating an app/the plugins">the plugins</dev-a> section, the next plugin's contents will be displayed to the user.
+        </p>
+        <p>
+            This plugin should be used (extended actually) when the navigation model could potentially be really large (and flat). Why? for two reasons:
+            <ul>
+                <li>
+                    Having too many kids isn't UX-friendly - the user can't really navigate between thousands of kids.
+                </li>
+                <li>
+                    Responsiveness: if there are too many kids your plugin might make the site not responsive (or even crash), due to a too big DOM for the browser to handle.
+                </li>
+            </ul>
+        </p>
+    </dd>
+</dl>

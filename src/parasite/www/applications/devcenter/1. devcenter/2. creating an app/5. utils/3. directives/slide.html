@@ -1,0 +1,286 @@
+<p>
+    There are various directives we've already built for your use.
+    <br />
+    Whenever you need a directive, first look here.
+    <br />
+    If the utils library doesn't have it (and you think it should), we encourage you to write the directive in a good, readable and reusable way, and add it to the utils (so others will benefit from it as well).
+</p>
+<dl>
+    <dt>
+        para-stretch
+    </dt>
+    <dd>
+        <p>
+            This directive is used as an attribute.
+        </p>
+        <p>
+            It makes sure the element's height is adjusted according to the available space:
+            <ul>
+                <li>
+                    If the browser window's height gets bigger, the element will be stretched to fill in the space.
+                </li>
+                <li>
+                    If the browser window's height gets smaller, the element will be shrinked so the window won't have a scrollbar.
+                </li>
+            </ul>
+        </p>
+        <p>
+            This directive should be used by elements inside a plugin's template in two cases:
+            <ul>
+                <li>
+                    When an element in the template might be two tall and we fear that the window will have a scrollbar.
+                    This isn't a desired user experience, and para-stretch should be used in order to avoid it
+                    (see the para-scrollbar directive for a solution for viewing the element's content that gets hidden because of the shrink).
+                </li>
+                <li>
+                    When an element can get along with any available height, and the taller it gets the better it looks to the user
+                    (the circles navigation plugin is a good example for it).
+                    <br />
+                    para-stretch makes sure your element will get as big as possible, so it looks awesome.
+                </li>
+            </ul>
+        </p>
+        <p>
+            The available space is calculated by comparing the total height of the plugin's template to the available browser window height.
+            <br />
+            As a consequence, if the plugin contains elements which are positioned outside of the flow (e.g by using absolute positioning), they aren't considered part of the plugin's height.
+        </p>
+        <p>
+            Only one para-stretch directive is permitted per plugin.
+        </p>
+        <p>
+            Note: this directive won't work on elements such as span. Use div instead.
+        </p>
+    </dd>
+
+    <dt>
+        para-scrollbar
+    </dt>
+    <dd>
+        <p>
+            This directive is used as an attribute.
+        </p>
+        <p>
+            In coordination with the para-stretch directive, this directive is responsible for displaying a slick and beautiful scrollbar over the para-stretch element whenever its content doesn't fit to the browser window, and is shrunk.
+        </p>
+        <p>
+            In most cases, whenever one uses the para-stretch directive, the para-scrollbar directive should be used as well.
+        </p>
+    </dd>
+
+    <dt>
+        para-tooltip
+    </dt>
+        <p>
+            This directive is used as an attribute.
+        </p>
+        <p>
+            The text used by this attribute will appear as a bootstrap tooltip whenever the user hovers over the element.
+        </p>
+        <p>
+            If this attribute changes (e.g. by using an angular expression), the tooltip changes accordingly.
+        </p>
+    <dd>
+
+    </dd>
+
+    <dt>
+        para-multi-selection, para-master-select, para-select
+    </dt>
+    <dd>
+        <p>
+            These directives cooperate together in order to give a multi-selection experience.
+            <br />
+            para-master-select and para-select must be nested within a para-multi-selection.
+        </p>
+        <p>
+            Each para-select creates a checkbox.
+            <br />
+            The para-master-select creates a checkbox which controls all of the para-select in a two-way manner:
+            <ul>
+                <li>
+                    Checking / clearing the para-master-select will check /clear all of the para-select.
+                </li>
+                <li>
+                    Selecting / clearing all of the para-selects will select /clear the para-master-select.
+                </li>
+                <li>
+                    Selecting only a number of the para-selects will cause the para-master-select to transfer to an intermediate state.
+                </li>
+            </ul>
+        </p>
+    </dd>
+
+    <dt>
+        para-toggle-button
+    </dt>
+    <dd>
+        <p>
+            This directive is used as an element.
+        </p>
+        <p>
+            It creates a toggle button with state bound to the para-state attribute.
+            <br />
+            One should pass in to the para-state an object with a <code>state</code> field.
+            <br />
+            The state field is two-way linked to the button's toggle state.
+        </p>
+    </dd>
+
+    <dt>
+        para-pretty-toggle
+    </dt>
+    <dd>
+        <p>
+            This directive is used as an element.
+        </p>
+        <p>
+            It creates a toggle button with state bound to ng-model.
+        </p>
+        <p>
+            It also supports an <code>activated</code> attribute:
+            <ul>
+                <li>
+                    If this attribute's expression evaluates to true, the button will support highliting visual effects (triggered in mouse hover).
+                </li>
+                <li>
+                    If this attribute's expression evaluates to false, when the user hovers over the button it won't visually respond.
+                </li>
+            </ul>
+        </p>
+    </dd>
+
+    <dt>
+        para-loading-button
+    </dt>
+    <dd>
+        <p>
+            This directive is used as an attribute on a button.
+        </p>
+        <p>
+            The value of this attribute should be an angular expression.
+            <br />
+            Once this expression is evaluated to true, the button will change to a loading button, meaning - it's content will change to a rotating loading icon.
+            <br />
+            Once the expression is evaluated to false, the loading animation stops, and the original content is restored.
+        </p>
+    </dd>
+
+    <dt>
+        para-pagination
+    </dt>
+    <dd>
+        <p>
+            This directive is used as an element.
+        </p>
+        <p>
+            It enables a basic pagination, e.g - one can split a big list using this directive.
+            <br />
+            Its visual appearance is a row of buttons - each represents a page.
+            Clicking on it will change the state of the directive (the <code>current</code> attribute which is described later is changed).
+            One can watch on the current page value, and display the appropriate data to the user.
+        </p>
+        <p>
+            The following attributes are used by the directive:
+            <ul>
+                <li>
+                    <code>pages</code>: the number of pages.
+                </li>
+                <li>
+                    <code>current</code>: an object which should have a <code>page</code> field.
+                    This field is two-way linked to current page the user has chosen.
+                </li>
+                <li>
+                    <code>window</code>: the number of buttons the pagination directive has.
+                    <br />
+                    If <code>pages > window</code>, the most left and right buttons will have an arrow icon on them (meaning - there are more pages).
+                </li>
+            </ul>
+        </p>
+    </dd>
+
+    <dt>
+        para-file-modal
+    </dt>
+    <dd>
+        <p>
+            This directive is used as an element.
+        </p>
+        <p>
+            It simply uses a template to create a bootstrap modal element with a visual UX appropriate for displaying a file contents.
+        </p>
+        <p>
+            It supports the following attributes:
+            <ul>
+                <li>
+                    <code>title</code>: the title of the modal.
+                </li>
+                <li>
+                    <code>path</code>: the path of the file.
+                </li>
+            </ul>
+        </p>
+        <p>
+            The contents of the file should be nested inside of the directive (these will be displayed in the modal's body).
+        </p>
+        <p>
+            In order to show the modal, one should give an id to the element, and then display the modal using the regular bootstrap way (either by using a link to it or by using the JavaScript API).
+        </p>
+    </dd>
+
+    <dt>
+        para-crop
+    </dt>
+    <dd>
+        <p>
+            This directive is used as an element.
+        </p>
+        <p>
+            It should be used whenever you've got a one line of text which is too long to be displayed.
+        </p>
+        <p>
+            This directive crops the text and appends ellipsis.
+            In order to view the original text, the user can hover over the text, and a tooltip with the original text will be displayed.
+        </p>
+        <p>
+            It supports the following attributes:
+            <ul>
+                <li>
+                    <code>text</code>: the text to be displayed.
+                </li>
+                <li>
+                    <code>limit</code>: the number of characters to display. Any character beyond this limit will be cropped.
+                </li>
+            </ul>
+        </p>
+    </dd>
+
+    <dt>
+        para-pie
+    </dt>
+    <dd>
+        <p>
+            This directive is used as an element.
+        </p>
+        <p>
+            It displays a pie chart.
+            <br />
+            When some slice is hovered / clicked its information is displayed in the center of the pie.
+        </p>
+        <p>
+            It expects to find in the <code>slices</code> attribute an array of slice objects. Each slice has the following fields:
+            <ul>
+                <li>
+                    <code>title</code>: the title of the slice.
+                </li>
+                <li>
+                    <code>size</code>: the size of the slice. Can be any positive number (integer or float).
+                    The sum of all of the slices' sizes don't have to add up to any specific number.
+                </li>
+                <li>
+                    <code>textPrefix</code>, <code>textSuffix</code>: these are used to construct the text that will be displayed in the center of the pie: <code>textPrefix + size + textSuffix</code>.
+                </li>
+            </ul>
+        </p>
+    </dd>
+</dl>

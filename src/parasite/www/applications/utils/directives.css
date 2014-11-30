@@ -1,0 +1,61 @@
+
+/**************************** scrollbar ****************************/
+
+.para-scrollbar {
+	position: relative;
+	overflow: scroll;
+}
+
+.d3-scroll-track {
+	top: 0;
+	background: #eee;
+}
+
+.d3-scroll-button {
+	background: #777;
+}
+
+.d3-scroll-track, .d3-scroll-button {
+	position: absolute;
+	right: 0;
+	width: 10px;
+    border-radius: 5px;
+}
+
+.para-scrollbar::-webkit-scrollbar {
+	width: 0;
+	display: none;
+}
+
+
+
+/************************ para-pretty-toggle ***********************/
+.para-pretty-toggle {
+    display: inline;
+    cursor: pointer;
+    border-color: #357ebd;
+    font-size: 18px;
+    border-style: solid;
+    border-width: 1px;
+    border-radius: 7px;
+    text-align: center;
+    padding: 10 16;
+    color: black;
+}
+
+.para-pretty-toggle:hover, .para-pretty-toggle.active:hover {
+    background-color: #3276b1;
+    border-color: #285e8e;
+    color: white;
+}
+
+.para-pretty-toggle:active, .para-pretty-toggle.active:active {
+    -webkit-box-shadow: inset 0 3px 5px rgba(0,0,0,0.125);
+    box-shadow: inset 0 3px 5px rgba(0,0,0,0.125);
+    color: white;
+}
+
+.para-pretty-toggle.active {
+    background-color: #428bca;
+    color: white;
+}

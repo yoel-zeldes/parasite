@@ -1,0 +1,83 @@
+<dl>
+    <dt>
+        Applications
+    </dt>
+    <dd>
+        <p>
+            Parasite is a web applications framework with the purpose of hosting all kinds of web sites (called applications).
+        </p>
+        <p>
+            To this date, parasite includes the following applications:
+            <ol>
+                <li>
+                    <strong>parasite</strong>: the application responsible for the homepage (where you can select an application to go to).
+                </li>
+                <li>
+                    <strong>devcenter</strong>: the application you're in right now :)
+                </li>
+                <li>
+                    <strong>skeleton</strong>: an empty application skeleton where you can start developing your new application.
+                </li>
+            </ol>
+        </p>
+    </dd>
+
+    <dt>
+        Plugins
+    </dt>
+    <dd>
+        <p>
+            All of the applications have the following UX structure:
+        <ul>
+            <li>
+                On the left side of the screen the user can navigate to whatever item he wishes to see information about.
+            </li>
+            <li>
+                On the right side of the screen the user can see information about the item he has selected.
+            </li>
+        </ul>
+        </p>
+        <p>
+            To support this unified user experience, parasite has the notion of plugins - content plugins and navigation plugins.
+            <br/>
+            The navigation plugins are responsible for the left half screen, and the content plugins are responsible for the right.
+        </p>
+        <p>
+            Every application can decide which plugins should be bundled with it.
+            <br/>
+            If, for instance, there are multiple ways to navigate inside the application, the application can use multiple navigation plugins. The user can switch between the plugins using the plugins buttons.
+        </p>
+    </dd>
+
+    <dt>
+        Navigation
+    </dt>
+    <dd>
+        <p>
+            In order for the plugins to communicate between them (e.g. - which item did the user select),
+            and in order for the application to specify which items exist, there's the notion of navigation model.
+        </p>
+        <p>
+            The navigation model is simply a tree structure of navigation nodes, each such node holds an item.
+            <br/>
+            The current navigation node is the node the user is currently viewing.
+        </p>
+        <p>
+            The role of the application is to build this tree (either in advance or in a lazy manner, e.g - only when the user navigates to a node will the application load the node's children).
+        </p>
+    </dd>
+
+    <dt>
+        URL
+    </dt>
+    <dd>
+        <p>
+            In order to make parasite feel like an app and not like an old fasion website, it uses HTML5 style of state linked to the URL.
+            <br/>
+            This means the state of the current app the user uses as well as where he is in the navigation tree and other information is encoded into the URL.
+        </p>
+        <p>
+            Parasite is responsible for making transitions between applications and navigation nodes seamlessly using the URL.
+        </p>
+    </dd>
+</dl>

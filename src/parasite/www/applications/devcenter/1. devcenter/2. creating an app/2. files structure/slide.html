@@ -1,0 +1,111 @@
+<p>
+    There are conventions of how you should call your files.
+    Some are only conventions (so all the applications will have the same file names), and some are necessary for the site to work properly.
+</p>
+<p>
+    Your application's files should reside in a directory named after the application's name, under <code>src/parasite/www/applications</code>.
+    This directory should contain:
+</p>
+<ul>
+    <li>
+        A file named <code>module.js</code>.
+        This file should contain only angular modules definitions used by your application (<code>angular.module('APP_NAME.app', []);</code>).
+        <br />
+        Building the site (using the Gulp system, as described in the <dev-a dev-ref="/deployment/parasite script">parasite script</dev-a> section) makes sure to include these files first (as angular modules must be defined before using them).
+        <br />
+        This is the only convention which is mandatory. If your application doesn't declare any modules, this file isn't needed (but it's a bad practice - every application should have its own modules).
+    </li>
+    <li>
+        A file named <code>app.js</code>.
+        This file should only register the <code>Application</code> object (discussed at <dev-a dev-ref="../the application">the application</dev-a> section).
+    </li>
+    <li>
+        <p>
+            If your application has its own plugins (discussed at <dev-a dev-ref="../the plugins">the plugins</dev-a> section), they should reside in a directory named <code>plugins</code>.
+        </p>
+        <p>
+            It's a good practice that this directory will have its own <code>module.js</code> file, which defines the angular modules used by the plugins.
+        </p>
+        <p>
+            Every plugin should have a directory named after the plugin name. This directory should contain:
+        </p>
+        <ul>
+            <li>
+                A file named <code>plugin.js></code>. All this file should do is register the plugin object.
+            </li>
+            <li>
+                A file named <code>plugin.html</code>. This is the HTML template used by the plugin (referenced by the <code>templateUrl</code> attribute of the plugin object).
+            </li>
+            <li>
+                A file named <code>XXX_controllers.js</code> which defines the plugin's controllers.
+            </li>
+        </ul>
+    </li>
+    <li>
+        If your application contains server side REST API, you should have a directory named <code>data</code>. It should contain:
+        <ul>
+            <li>
+                <code>services.js</code> file: this file contains an angular service which is responsible for accessing the server (e.g. - by using the <code>$resource</code> service).
+                <br />
+                This file is the client side API of the server side REST API. Your client side code should use this service to get data from the server.
+            </li>
+            <li>
+                <code>model.js</code> file: should contain the objects which are returned from the <code>services.js</code> file.
+                This code doesn't access the server. If an object needs to access the server,
+                it should
+                <ul>
+                    <li>
+                        Receive the service instance from <code>services.js</code> in the constructor (and the function in <code>services.js</code> which creates that object should pass itself to the constructor).
+                    </li>
+                    <li>
+                        Or, inject the service defined in <code>services.js</code> and use it directly.
+                    </li>
+                </ul>
+            </li>
+            <li>
+                <p>
+                    If you want to support mocks, <code>services.js</code> shouldn't access the server directly.
+                    Instead, it should use some other service which either access the server, or creates mock objects.
+                </p>
+                <p>
+                    The role of <code>services.js</code> is to create the objects declared in <code>model.js</code> from the response it receives from the underlying service which accesses the server / creates mocks - this response should be a simple JSON.
+                </p>
+                <p>
+                    The underlying service is composed out of three files:
+                    <ol>
+                        <li>
+                            <p>
+                                <code>data_retriever.js</code>: this file declares a single service which is injected to <code>service.js</code>.
+                                This service will have a simple API which returns JSONs.
+                            </p>
+                            <p>
+                                This file is pretty simple. It should look like
+                                <pre>
+angular.module('APP_NAME.app')
+.service('ApplicationDataRetriever', function($injector, mock) {
+    if (mock) {
+        return $injector.get('ApplicationDataRetrieverMock');
+    }
+    else {
+        return $injector.get('ApplicationDataRetrieverRest');
+    }
+});
+                                </pre>
+                                All this file does is injecting the right service - either a mock one (if the <code>mock</code> angular const is true, which is defined in <code>dev_services.js</code>), or a REST one.
+                            </p>
+                        </li>
+                        <li>
+                            <code>data_retriever_rest.js</code>: this file should declare a service (in the example above - it's called <code>ApplicationDataRetrieverRest</code>), which simply accesses the server and returns JSONs.
+                        </li>
+                        <li>
+                            <code>data_retriever_mock.js</code>: this file should declare a service (in the example above - it's called <code>ApplicationDataRetrieverMock</code>), which simply returns pre-made JSONs.
+                        </li>
+                    </ol>
+                </p>
+                <p>
+                    In order to avoid code duplication, <code>services.js</code> should do all the work which is common to both <code>data_retriever_rest.js</code> and <code>data_retriever_mock.js</code>, e.g. - it should wrap the response in a promise (using <code>$q</code>).
+                </p>
+            </li>
+        </ul>
+    </li>
+</ul>

@@ -1,0 +1,33 @@
+<span ng-controller="ShowcaseCtrl">
+    <div class="hero-unit">
+        <h1>
+            {{ app.name }}
+        </h1>
+        <p>
+            {{ appDescription.highlight }}
+        </p>
+        <p>
+            <a class="btn btn-primary btn-large" ng-click="currentApplication(app)">
+                Go to app
+            </a>
+        </p>
+    </div>
+
+    <div id="appCarousel" class="carousel slide" ng-if="appDescription.screenshots.length > 0">
+        <div class="carousel-inner">
+            <div class="item"
+                 ng-class="$first ? 'active' : ''"
+                 ng-repeat="screenshot in appDescription.screenshots">
+                <img ng-src="{{ screenshot.imgSrc }}" style="margin:auto;">
+                <div class="carousel-caption">
+                    <p>{{ screenshot.caption }}</p>
+                </div>
+            </div>
+        </div>
+
+        <span ng-if="appDescription.screenshots.length > 1">
+            <a class="carousel-control left" href="#" ng-click="prev()">&lsaquo;</a>
+            <a class="carousel-control right" href="#" ng-click="next()">&rsaquo;</a>
+        </span>
+    </div>
+</span>

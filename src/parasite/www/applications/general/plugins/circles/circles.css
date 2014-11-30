@@ -1,0 +1,26 @@
+#circles text {
+    font-size: 11px;
+    pointer-events: none;
+}
+
+#circles text.parent {
+    fill: #1f77b4;
+}
+
+#circles circle {
+    fill: #1f77b4;
+    fill-opacity: .1;
+    stroke: steelblue;
+    pointer-events: all;
+}
+
+#circles circle:hover {
+    stroke: #ff7f0e;
+    stroke-width: .5px;
+}
+
+svg {
+    -webkit-border-radius: 4px;
+    -moz-border-radius: 4px;
+    border-radius: 4px;
+}

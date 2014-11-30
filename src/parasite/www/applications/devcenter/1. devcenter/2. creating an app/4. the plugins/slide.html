@@ -1,0 +1,51 @@
+<p>
+    There are two types of plugins:
+    <ol>
+        <li>
+            <code>NavigationPlugin</code>: this plugin is responsible for letting the user to navigate inside the application's navigation model.
+        </li>
+        <li>
+            <code>ContentPlugin</code>: this plugin is responsible for displaying the content of the navigation node the user has selected.
+        </li>
+    </ol>
+</p>
+<p>
+    These two classes reside in the <code>Plugins</code> angular provider. They both have the following interface:
+    <ul>
+        <li>
+            <code>id</code>: a string representing the plugin.
+            This is the string used in the Application definition when choosing which plugins are used by the application
+            (see <dev-a dev-ref="/creating an app/the application">the application</dev-a> section).
+        </li>
+        <li>
+            <code>templateUrl</code>: the url of the HTML page which contains the plugin's content.
+        </li>
+        <li>
+            <code>canHandle(item)</code>: a function which given a NavigationNode's item returns a boolean indicating whether the plugin can display its content or not.
+            <br/>
+            If it can't handle the item, the next plugin will automatically take control and display its templateUrl to the user.
+            <br />
+            This function can be overridden by the application using this plugin (see more about it at  <dev-a dev-ref="../the application">the application</dev-a>).
+        </li>
+        <li>
+            <code>register(plugin)</code>: a static method. There's a version for NavigationPlugin and a version for ContentPlugin.
+            <br/>
+            Each plugin should register itself to parasite using this function.
+        </li>
+    </ul>
+</p>
+<p>
+    In order to create a new plugin, one should write the following:
+    <pre>
+angular.module('amazingApp')
+.config(function(PluginsProvider) {
+    PluginsProvider.ContentPlugin.register({
+        id          : "amazing.content",
+        templateUrl : "/www/applications/plugins/content/amazing/plugin.html",
+        canHandle   : function(item) {
+            return true;
+        }
+    });
+});
+    </pre>
+</p>

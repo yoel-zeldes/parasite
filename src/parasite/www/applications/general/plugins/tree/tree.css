@@ -1,0 +1,64 @@
+#tree {
+	overflow: auto;
+	position: relative;
+}
+
+#tree .node rect.row {
+    cursor: pointer;
+    fill: #c6dbef;
+    fill-opacity: 0;
+    stroke: #3182bd;
+    stroke-width: 1px;
+    stroke-opacity: 0;
+}
+
+#tree .node rect.row:hover {
+	fill-opacity: .25;
+	stroke-opacity: .5;
+}
+
+#tree .node text {
+    font: 14px sans-serif;
+    pointer-events: none;
+}
+
+#tree .node text.fa {
+	font-family: FontAwesome;
+}
+
+#tree .node text.fa.arrow {
+	pointer-events: all;
+	cursor: pointer;
+}
+
+#tree .node text.fa.type {
+	stroke: #000;
+	stroke-width: .5px;
+}
+
+#tree .link {
+    fill: none;
+    stroke: #ccc;
+    stroke-width: 1.5px;
+}
+
+#tree .selected {
+    fill-opacity: .5 !important;
+    stroke-opacity: 1 !important;
+}
+
+svg {
+	overflow: scroll;
+}
+
+.arrow::selection, .type::selection {
+	background: transparent;
+}
+
+.arrow::moz-selection, .type::selection {
+	background: transparent;
+}
+
+.arrow::webgit-selection, .type::selection {
+	background: transparent;
+}

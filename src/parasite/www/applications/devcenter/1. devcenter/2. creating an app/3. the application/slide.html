@@ -1,0 +1,219 @@
+<p>
+    The Application object is the interface of your application which the parasite framework uses.
+</p>
+<p>
+    Parasite calls the various methods of the Application object whenever it needs.
+</p>
+<p>
+    The Application interface is located in the <code>Applications</code> provider inside the <code>core.applications</code> angular module. It has the following methods:
+</p>
+<p>
+    <ul>
+        <li>
+            <p>
+                <code>init(name, navigationPluginConfs, contentPluginConfs)</code>:
+                <br />
+                this is the constructor. It expects to get the application name,
+                an Array of configurations of navigation plugins, and an Array of configurations of content plugins.
+            </p>
+            <p>
+                Each plugin configuration is a plain js object with the following fields:
+                <ul>
+                    <li>
+                        <code>pluginId</code>: the id of the plugin to use. This is the same id used by the code declaring the plugin (read about creating new plugins at <dev-a dev-ref="/creating an app/the plugins">the plugins</dev-a> section).
+                    </li>
+                    <li>
+                        <code>repr</code>: a string of HTML snippet representing the plugin. This snippet is displayed to the user on the buttons he can click to choose a plugin.
+                        <br />
+                        An example for a good repr:
+                        <br />
+                        <code>
+                            <span ng-bind="'<i class=\'icon-key icon-large\'></i> <big>cool plugin</big>'"></span>
+                        </code>
+                    </li>
+                    <li>
+                        <code>canHandle(item)</code> (optional): if specified, overrides the plugin's <code>canHandle</code> (see more about it at  <dev-a dev-ref="../the plugins">the plugins</dev-a>).
+                    </li>
+                </ul>
+                <p>
+                    Note: we used a design pattern of separating the definition of a plugin and the usage (reference) of a plugin.
+                    <br />
+                    This pattern is used (as opposed to directly defining the plugin in the application definition)
+                    so applications can reuse existing plugins used by other applications, or even use multiple instances of the same plugin.
+                </p>
+            </p>
+        </li>
+
+        <li>
+            <p>
+                <code>getNavigationModel(update)</code>:
+                <br />
+                an abstract function (to be implemented by an extending class).
+                <br />
+                This function should return the root of the navigation tree. This tree represents all the items the user can view and navigate to (each node in the tree has an <code>item</code> field. This field contains the application-specific data associated with the navigation node).
+                <br />
+                You can read more in the <dev-a dev-ref="/parasite core/navigation">navigation</dev-a> section.
+                <br />
+                The return type is a NavigationNode (located in the <code>NavigationModel</code> service inside the <code>core.navigation</code> angular module), or a promise of a NavigationNode - in case constructing the tree takes time.
+                <br />
+                <span class="muted">(in order to construct a promise, one should use the angular <code>$q</code> module.)</span>
+                <br />
+                This function gets a boolean <code>update</code> parameter. If false, this function should return the last calculated root.
+                <br />
+                If true (or it's the first time this function is called) - a new tree should be created. Parasite calls this function with true, for instance, when the user performs a search. As this alters the navigation tree, <code>getNavigationModel</code> is called with a true parameter.
+            </p>
+            <p>
+                Although this function should return the root of the navigation tree, its descendants don't have to be populated yet (and it's recommended that they won't - in case it might take time to construct them. Returning the tree should be as fast as possible, so the user will be able to start using the application). How can it be done?
+                <br />
+                As discussed in the <dev-a dev-ref="/parasite core/navigation">navigation</dev-a> section, you can instantiate the NavigationNode with no kids, but with a positive number of kids. Later on, calling the <code>expand</code> function will get its kids.
+                <br />
+                In most cases, calling the expand function should be done by the navigation plugins.
+            </p>
+            <p>
+                The NavigationNode's item's data doesn't have to be filled either - you could use the design pattern mentioned in the <dev-a dev-ref="/creating an app/utils/controllers">utils controllers</dev-a> section in order to defer heavy operations related to filling the item's data.
+            </p>
+            <p>
+                If the application supports <dev-a dev-ref="../server side/search">search or sort</dev-a>, this is the place to use the search query the user has entered in the search bar and the field which is being sorted by in order to answer his search needs.
+                <br />
+                This is done by accessing the <code>Search</code> service. Read more about it at the <dev-a dev-ref="/parasite core/search">search</dev-a> section.
+            </p>
+        </li>
+
+        <li>
+            <p>
+                <code>getKids(node, startIndex, endIndex)</code>:
+                <br />
+                an abstract function (to be implemented by an extending class).
+                <br />
+                Given a NavigationNode, create its kids (in case they haven't been created already).
+                <br />
+                This function also gets startIndex and endIndex. the kids at this range (not including endIndex) should be created. Of course, if creating some of the kids costs the same as creating all of the kids, it's ok to create all of them.
+                <br />
+                <span class="muted">Note: this function is called by <code>NavigationNode.expand</code> function.</span>
+            </p>
+            <p>
+                As stated at <code>getNavigationModel</code>, if your application supports search, you should handle it here as well in order to get only kids which are relvant to the user search query.
+            </p>
+        </li>
+
+        <li>
+            <p>
+                <code>isNavigationLinkedToUrl()</code>:
+                <br />
+                an abstract function (to be implemented by an extending class).
+                <br />
+                This function should return a boolean indicating whether the URL is linked to the current navigation node.
+                <br />
+                If it is, the user can navigate in the application by navigating to a different URL.
+                <br />
+                In addition, the index.html page will have breadcrumbs letting the user to navigate up in the navigation model hierarchy.
+            </p>
+        </li>
+
+        <li>
+            <p>
+                <code>isLoginSupported()</code>:
+                <br />
+                an abstract function (to be implemented by an extending class).
+                <br />
+                This function should return a boolean indicating whether the application requires user login in order to perform some actions.
+                <br />
+                If it is, the index.html page will have a place where the user can login.
+                <br />
+                When the application requires user login in order to perform some action, it should use the <dev-a dev-ref="/parasite core/login">login</dev-a> service.
+            </p>
+        </li>
+
+        <li>
+            <p>
+                <code>getVisualization(item)</code>:
+                <br />
+                an abstract function (to be implemented by an extending class).
+                <br />
+                This function gets an item (from the navigation model) and should return info about how a navigation plugin should display it.
+                <br />
+                The table navigation plugin, for instance, uses this info in order to create the table of items and their fields.
+                <br />
+                The return value should be an object of the format
+                <pre>
+{
+    icon        : {
+        text    : "",
+        fgColor : "",
+        bgColor : ""
+    },
+    dataTitles  : [],
+    data        : []
+}
+                </pre>
+                <ul>
+                    <li>
+                        <code>icon</code>: How should the item's icon look like?
+                        <ul>
+                            <li>
+                                <code>text</code>: the text of the icon. One can use font awesome and fill this text with the appropriate unicode value of the desired icon.
+                            </li>
+                            <li>
+                                <code>fgColor</code>: the foreground font color.
+                            </li>
+                            <li>
+                                <code>bgColor</code>: the background color.
+                            </li>
+                        </ul>
+                    </li>
+                    <li>
+                        <code>dataTitles</code>: an Array of objects describing the properties of an item.
+                        Each such object contains a string named <code>title</code>
+                        (which is used, for example, as the header of the table created by the table navigation plugin),
+                        and a boolean named <code>sortable</code> (which states if the server side supports sorting based on this property.
+                        This is also being used by the table navigation plugin. Read more about it at <dev-a dev-ref="../server side/search/sorting">sorting</dev-a>).
+                        <br />
+                        This data shouldn't be specific to the given item.
+                    </li>
+                    <li>
+                        <code>data</code>: an Array of strings containing the item's data. This data is used, for example, as the contents of the rows of the table created by the table navigation plugin.
+                        <br />
+                        This data should be specific to the given item.
+                    </li>
+                </ul>
+            </p>
+        </li>
+    </ul>
+</p>
+
+
+<p>
+    In order to create a new application, one should extend the <code>Application</code> class (we use class.js for inheritance. Read how to use it at http://enjohn.org/), instantiate it, and register it.
+    <br />
+    To get a handle to the <code>Application</code> class, one should inject <code>ApplicationsProvider</code> in an angular module's <code>config</code> block.
+    The <code>ApplicationsProvider</code> has the <code>Application</code> class, and the <code>register</code> function.
+</p>
+<p>
+    To conclude, in order to create a new application, one should write the following:
+    <pre>
+angular.module('amazingApp')
+.config(function(ApplicationsProvider) {
+var amazingAppClass =
+    ApplicationsProvider.Application.extend({
+        getNavigationModel : function(update) {
+            ...
+        },
+        ...
+    });
+var app = new amazingAppClass("amazing app name",
+    [
+        {
+            plugin  : "general.table",
+            repr    : "&lt;i class='icon-reorder icon-large'&gt;&lt;/i&gt; &lt;big&gt;units&lt;/big&gt;"
+        }
+    ],
+    [
+        {
+            plugin  : "amazing.content",
+            repr    : "&lt;i class='icon-key icon-large'&gt;&lt;/i&gt; &lt;big&gt;amazing&lt;/big&gt;"
+        }
+    ]);
+ApplicationsProvider.register(app);
+});
+    </pre>
+</p>

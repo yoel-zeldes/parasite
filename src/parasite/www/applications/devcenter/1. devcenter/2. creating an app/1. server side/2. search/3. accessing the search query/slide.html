@@ -1,0 +1,18 @@
+<p>
+    Once the user has hit the search button, parasite calls your application's <code>getNavigationModel</code> with <code>update</code> as true.
+</p>
+<p>
+    What you should do is use the <dev-a dev-ref="/parasite core/search">Search</dev-a> angular service in order to get the search query, and pass it on to the server side (e.g. by using the angular <code>$resource</code> service).
+</p>
+<p>
+    The convention is to pass it to the server side's REST API in the URL as an argument called <code>q</code>.
+</p>
+<p>
+    In the server side you should write <code>from parasite.search import get_search_query</code>.
+</p>
+<p>
+    Calling <code>get_search_query</code> will return an object containing the search items in the user's search query.
+</p>
+<p>
+    You should use it in order to construct the result.
+</p>

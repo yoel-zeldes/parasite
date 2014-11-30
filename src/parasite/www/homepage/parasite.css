@@ -1,0 +1,216 @@
+.body, .navbar-fixed-bottom {
+	width			: 1000px;
+	margin			: auto;
+	margin-top		: 10px;
+}
+
+.navbar-fixed-bottom {
+	margin-bottom	: 10px;
+}
+
+input[type="text"] {
+	height			: 30px;
+}
+
+.navbar-text {
+	margin-left		: 10px;
+}
+
+#select2-search-options {
+    width           : 600px;
+}
+
+.plugin-loading-spinner {
+    position: relative;
+    width: 100%;
+    text-align: center;
+    height: 0px;
+    visibility: hidden;
+}
+
+.plugin-loading-spinner span {
+    display: inline-block;
+    vertical-align: middle;
+    width: 24px;
+    height: 24px;
+    margin: 50px auto;
+    border-radius: 50px;
+    animation-duration: 0.9s;
+    -webkit-animation-duration: 0.9s;
+    -moz-animation-duration: 0.9s;
+    animation-timing-function: ease-in-out;
+    -webkit-animation-timing-function: ease-in-out;
+    -moz-animation-timing-function: ease-in-out;
+    animation-iteration-count: infinite;
+    -webkit-animation-iteration-count: infinite;
+    -moz-animation-iteration-count: infinite;
+    animation-direction: alternate;
+    -webkit-animation-direction: alternate;
+    -moz-animation-direction: alternate;
+}
+.plugin-loading-spinner.plugin-loading span {
+    animation-name: plugin-loading-spinner;
+    -webkit-animation-name: plugin-loading-spinner;
+    -moz-animation-name: plugin-loading-spinner;
+}
+.plugin-loading-spinner.plugin-loading-failed span {
+    animation-name: plugin-loading-failed-spinner;
+    -webkit-animation-name: plugin-loading-failed-spinner;
+    -moz-animation-name: plugin-loading-failed-spinner;
+}
+
+.plugin-loading-spinner span:nth-last-of-type(1) {
+    background-color: indianred;
+}
+
+.plugin-loading-spinner span:nth-last-of-type(2) {
+    -webkit-animation-delay: 0.3s;
+    -moz-animation-delay: 0.3s;
+    background-color: limegreen;
+}
+
+.plugin-loading-spinner span:nth-last-of-type(3) {
+    -webkit-animation-delay: 0.6s;
+    -moz-animation-delay: 0.6s;
+    background-color: dodgerblue;
+}
+
+@-webkit-keyframes plugin-loading-spinner {
+    0% {
+        width: 24px;
+        height: 24px;
+        -webkit-transform: translateY(0);
+    }
+
+    100% {
+        width: 10px;
+        height: 10px;
+        -webkit-transform: translateY(21px);
+        background-color: black;
+    }
+}
+
+@-moz-keyframes plugin-loading-spinner {
+    0% {
+        width: 24px;
+        height: 24px;
+        -moz-transform: translateY(0);
+    }
+
+    100% {
+        width: 10px;
+        height: 10px;
+        -moz-transform: translateY(21px);
+        background-color: black;
+    }
+}
+
+@-webkit-keyframes plugin-loading-failed-spinner {
+    0% {
+        width: 24px;
+        height: 24px;
+        -webkit-transform: translateY(0);
+        background-color: black;
+    }
+
+    100% {
+        width: 10px;
+        height: 10px;
+        -webkit-transform: translateY(21px);
+        background-color: black;
+    }
+}
+
+@-moz-keyframes plugin-loading-failed-spinner {
+    0% {
+        width: 24px;
+        height: 24px;
+        -moz-transform: translateY(0);
+        background-color: black;
+    }
+
+    100% {
+        width: 10px;
+        height: 10px;
+        -moz-transform: translateY(21px);
+        background-color: black;
+    }
+}
+
+
+
+.plugin-loading-spinner.plugin-loading,
+.plugin-loading-spinner.plugin-loading-failed {
+    visibility: visible;
+}
+
+.plugin.plugin-loading {
+    opacity: 0.3;
+}
+
+.content-plugin.ng-enter,
+.content-plugin.ng-leave,
+.navigation-plugin.span12-add {
+    -webkit-transition: 0.4s linear all;
+    transition: 0.4s linear all;
+}
+.content-plugin.ng-enter {
+    opacity: 0;
+}
+.content-plugin.ng-enter-active {
+    opacity: 1;
+}
+.content-plugin.ng-leave {
+    opacity: 1;
+}
+.content-plugin.ng-leave-active {
+    opacity: 0;
+}
+.navigation-plugin.span12-add {
+    width: 48.93617021276595% !important;
+}
+
+
+.well-white {
+	background-color: white !important;
+}
+
+.tooltip-inner {
+    max-width: 1000px !important; /* bootstrap has a max-width of 200px, which is not enough for us */
+}
+
+/* Firefox: */
+@-moz-document url-prefix() {
+    .pre-scrollable {
+        width: 17em;
+    }
+}
+
+
+div[para-plugin-canvas-container] {
+    border-width: 0px;
+}
+
+div[para-plugin-canvas-container] .hidden {
+    visibility: hidden;
+}
+
+.navigation-plugin .plugin {
+    padding-right: 20px;
+}
+
+.content-plugin .plugin {
+    padding-left: 20px;
+}
+
+div[para-plugin-canvas-container] .k-splitbar {
+    background-color: #f5f5f5;
+    border-width: 0px;
+    box-shadow: inherit;
+    -webkit-box-shadow: inherit;
+}
+
+div[para-plugin-canvas-container] .k-resize-handle,
+div[para-plugin-canvas-container] .k-collapse-next {
+    visibility: hidden;
+}

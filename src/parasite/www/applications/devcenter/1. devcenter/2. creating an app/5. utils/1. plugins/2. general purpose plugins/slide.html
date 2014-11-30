@@ -1,0 +1,100 @@
+<p>
+    As opposed to the <code>UtilsPlugins</code>'s abstract plugins, the general purpose plugins introduced here are fully working plugins.
+</p>
+<p>
+    In order to use them in your new amazing app, you just need to reference them from your application object,
+    as stated in <dev-a dev-ref="/creating an app/the application">the application</dev-a> section.
+</p>
+
+<dl>
+    <dt>
+        tree
+    </dt>
+    <dd>
+        <p>
+            The tree is a navigation plugin.
+        </p>
+        <p>
+            It consists out of a beautifully crafted d3.js tree.
+            <br />
+            The root of the tree is the root of the navigation tree - <code>Navigation.currentNavigationModel()</code>.
+            <br />
+            The navigation model's nodes ids are displayed in the tree.
+        </p>
+        <p>
+            There's a lot of heavy-weight functionality in this plugin, and explaining the code is more complicated than just looking at it...
+        </p>
+        <p>
+            One thing to notice is that the plugin's implementation has to keep information about each node. To do so, the plugin stores the info in the nodes themselves.
+        </p>
+        <p>
+            This isn't a recommended thing to do, but if you must make the navigation node objects dirty, make sure you do it in your own namespace (the tree uses the tree namespace - the info about a node is stored in node.tree).
+        </p>
+    </dd>
+
+    <dt>
+        table
+    </dt>
+    <dd>
+        <p>
+            The table is a navigation plugin.
+        </p>
+        <p>
+            It displays the navigation model in a tabular format: each row displays data about a single node.
+        </p>
+        <p>
+            The model has a tree structure, so this plugin only shows the kids of a single node.
+            <br />
+            The user can drill into the model - by double clicking a node in the table, its kids will now be displayed.
+        </p>
+        <p>
+            This plugin uses the application's <code>getVisualization</code> function in order to display extended info about each node (this data is displayed in each row's cells).
+            <br />
+            In addition, this plugin uses pagination - if there are too many kids, only a part of them will be displayed to the user.
+        </p>
+        <p>
+            One should use this plugin whenever the navigation tree hierarchy is too big and relatively flat.
+            In this situation the tree fails for two reasons
+            <ul>
+                <li>
+                    The UI rendering might get stuck, as there are too many elements to be drawn in the tree.
+                </li>
+                <li>
+                    Even if doesn't get stuck, the UX is bad: the user will get a hard time navigating through the tree.
+                </li>
+            </ul>
+        </p>
+        <p>
+            The table plugin solves this problem by splitting a node's kids to pages, and only one page is visible at a time.
+        </p>
+        <p>
+            As with the tree case, in order to understand the table plugin, it's much simpler to read the code itself.
+        </p>
+    </dd>
+
+    <dt>
+        circles
+    </dt>
+    <dd>
+        <p>
+            The circles is a navigation plugin.
+        </p>
+        <p>
+            In order to use it, the items of the navigation nodes should have a <code>size</code> field (or some of the items at least, as described below).
+        </p>
+        <p>
+            This plugin gives a different navigation UX.
+            the nodes hierarchy is represented as nested circles.
+        </p>
+        <p>
+            The size of each circle is proportional to the size of the node's item.
+            If the size isn't defined, it will sum the sizes of the node's kids, and set it as the new size (this is a recursive process).
+        </p>
+        <p>
+            This visualisation gives a feeling of the interactions between the nodes, e.g: bigger circle might be more important than smaller ones.
+        </p>
+        <p>
+            The application constructing the navigation model should put into the <code>size</code> field something which makes sense to the application.
+        </p>
+    </dd>
+</dl>

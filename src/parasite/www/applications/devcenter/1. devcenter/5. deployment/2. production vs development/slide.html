@@ -1,0 +1,64 @@
+<p>
+    The parasite site can operate in two modes - development mode and production mode.
+</p>
+<p>
+    When running it on your local machine, you should be in development mode.
+</p>
+<p>
+    When running the site in the production parasite server, it is running in production mode.
+</p>
+<p>
+    The main differences between the modes are:
+</p>
+
+<dl>
+    <dt>
+        dev
+    </dt>
+    <dd>
+        <p>
+            <code>dev</code> is a const defined in the <code>core.dev</code> angular module.
+            When true we're on development mode, and when false - production mode.
+        </p>
+        <p>
+            The <dev-a dev-ref="../parasite script">parasite script</dev-a>, using Gulp, takes care of production vs development for you. All you have to do is run <code>parasite dev</code> / <code>parasite prod</code>.
+        </p>
+        <p>
+            When running <code>parasite prod</code>, the file prod_mode.js is injected to the final html file.
+        </p>
+        <p>
+            When running <code>parasite dev</code>, the file dev_mode.js is injected to the final html file, as well as dev_services.js.
+        </p>
+        <p>
+            prod_mode.js and dev_mode.js define the const <code>dev</code> to be true / false.
+        </p>
+        <p>
+            In development mode, dev_services.js is injected as well. This file should include all the consts and services that you need during the development process.
+        </p>
+        <p>
+            In order to make sure things don't break in production, you must include the same consts and services in prod_mode.js, or in production angular will complain it fails to inject them.
+            <br />
+            So you should define a production equivalence of them, e.g.:
+            <br />
+            <code>const('mock', false)</code>.
+        </p>
+    </dd>
+
+    <dt>
+        URLs
+    </dt>
+    <dd>
+        <p>
+            In production mode, the host name defines the current application, e.g. - http://APP_NAME makes APP_NAME the current application.
+        </p>
+        <p>
+            In development mode, the host name doesn't change (as we develop at 127.0.0.1). Therefore, the current application is defined by using the URL, e.g. - http://127.0.0.1:8000/app/APP_NAME.
+        </p>
+        <p>
+            The <code>ParasiteURL</code> service is responsible for choosing the right representation, based on the <code>dev</code> const.
+        </p>
+        <p>
+            As a consequence, the server side shouldn't contain any logic handling the URL representation - this should be left to the client side (e.g. - don't redirect to http://APP_NAME/&lt;something&gt;, as it won't work in development mode).
+        </p>
+    </dd>
+</dl>

@@ -1,0 +1,81 @@
+<p>
+    There are two providers related to navigation:
+    <dl>
+        <dt>
+            NavigationModel <small class="muted">(found in <code>navigation_model.js</code>)</small>
+        </dt>
+        <dd>
+            <p>
+                This service has a single attribute - the <code>NavigationNode</code> class.
+                this class is a data structure used by the application's navigation model (read more about it at <dev-a dev-ref="/creating an app/the application">the application</dev-a> section).
+            </p>
+            <p>
+                The navigation model is basically a tree structure composed of NavigationNodes.
+                Each NavigationNode contains references to its parent, kids, and a data item.
+            </p>
+            <p>
+                The only difference between this tree structure and a naive implementation of a tree
+                is that the NavigationNode supports lazy operations: if the navigation model tree is potentially
+                huge, we don't have to calculate it in advance - we can create only the root, and tell it how many kids it is supposed to have.
+                Then, when we need those kids, they will be created (by the application).
+                This is a recursive process - the grandchildren can also be lazily created.
+            </p>
+            <p>
+                The purpose of the navigation model tree is to hold all of the items which a user of the application can look at.
+            </p>
+            <p>
+                This means that every application under the parasite framework must construct its items in a tree structure.
+                For most of the applications it can be done, but for some it may be a little inconvenient.
+            </p>
+            <p>
+                But don't worry - every problem can be solved by constructing a smart navigation model and creating navigation plugins if needed.
+            </p>
+            <p>
+                Lets assume, for instance, that you want to have a flat-like navigation model.
+                This is archived by constructing a root with all of the items being populated as kids of the root.
+                Using the table navigation plugin with this navigation model gives good results, because we can show general
+                information about your application when the user clicks on the root NavigationNode (using appropriate content plugins).
+                <br />
+                If we didn't want to show the root NavigationNode - we could have written our own navigation plugin which ignores the root.
+            </p>
+            <p>
+                The <code>NavigationNode</code> attributes are documented in the code itself.
+            </p>
+        </dd>
+
+        <dt>
+            Navigation <small class="muted">(found in <code>navigation_services.js</code>)</small>
+        </dt>
+        <dd>
+            This service holds the state of navigation:
+            <ul>
+                <li>
+                    Current navigation model: use the <code>Navigation</code> service in order to access the current navigation model.
+                    The Parasite framework makes sure this keeps updated all the time (e.g. if the current application changes Parasite sets the current navigation model to the new application's newly calculated navigation model).
+                </li>
+                <li>
+                    Current navigation node: access the node which the user is currently viewing.
+                </li>
+            </ul>
+            The service's attributes are documented in the code itself.
+        </dd>
+    </dl>
+</p>
+<p>
+    <h3>Conclusion</h3>
+    <p>
+        The parasite framework can be used best for your application by using the ideas of navigation model, application object, and navigation plugins in a good manner.
+    </p>
+    <p>
+        If the application object can create the navigation model root and its kids, and if it uses navigation plugins which get their data from the navigation model, then everything integrates as expected.
+    </p>
+    <p>
+        The navigation model is some sort of communication protocol between the application and the navigation plugin.
+        One could write a BAD application and navigation plugin in which the navigation plugin doesn't use the navigation model at all, but instead constructs the GUI by talking directly to the application object (or even talk directly to the server side).
+        Although this could produce a working application, it'll be harder to write it and to maintain it.
+        In addition, this application wouldn't be able to use existing navigation plugins such as the table navigation plugin, as they expect to get their data from the navigation model.
+    </p>
+    <p>
+        The navigation model is a layer of abstraction between the application and the navigation plugins.
+    </p>
+</p>

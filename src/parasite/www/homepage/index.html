@@ -1,0 +1,162 @@
+<html ng-app="parasiteApp">
+	<head>
+        <!-- inject:css -->
+        <!-- endinject -->
+
+        <!-- inject:js -->
+        <!-- endinject -->
+
+        <!-- inject:dev:js -->
+        <!-- endinject -->
+	</head>
+
+	<body>
+		<div ng-controller="ApplicationsCtrl">
+			<div class="navbar">
+				<div ng-controller="SearchCtrl"
+                     ng-show="searchSupported || login.isLoginSupported()"
+                     class="navbar-inner">
+					<div class="container-fluid">
+
+						<a class="brand" href="#">{{ currentApplication().name }}</a>
+
+						<form ng-show="searchSupported"
+							  class="navbar-search form-search"
+							  ng-submit="search()">
+							<div class="input-append">
+								<input type="hidden"
+                                       id="select2-search-options"
+                                       ui-select2="select2Options"
+                                       multiple
+                                       ng-model="searchInput"
+                                       data-placeholder="Filter...">
+                                </input>
+
+                                <button type="submit" class="btn" para-loading-button="searching()" icon="icon-spinner">
+                                    <i class="icon-search"></i> Search
+                                </button>
+							</div>
+						</form>
+
+
+						<div ng-controller="LoginCtrl"
+                             ng-if="login.isLoginSupported()"
+                             class="navbar-text pull-right">
+                            {{ greetingPrefix }}<a href="#" ng-click="login.promptLogin()">{{ login.user() || "you" }}</a>{{ greetingSuffix }}
+						</div>
+					</div>
+				</div>
+			</div>
+
+			<div class="container-fluid body">
+
+				<div class="row-fluid" ng-if="currentApplication().isNavigationLinkedToUrl()">
+					<ul class="breadcrumb" ng-controller="BreadcrumbCtrl">
+						<li ng-repeat="crumb in breadcrumbs"
+							ng-class="$last ? 'active' : ''">
+
+							<span class="divider">
+								/
+							</span>
+							<a href="" ng-show="! $last" ng-click="currentNavigationNode(crumb)">
+								{{ crumb.name }}
+							</a>
+							<span ng-show="$last">
+								{{ crumb.name }}
+							</span>
+
+						</li>
+					</ul>
+				</div>
+
+
+			    <div class="row-fluid">
+		    		<p class="navbar-text" style="text-align: center;">
+                        <ul class="nav nav-pills pull-left"
+                            ng-style="navigationPluginConfs().length <= 1 ? {visibility : 'hidden'} : {}">
+                            <li ng-class="{'active' : p == currentNavigationPluginConf()}"
+                                ng-repeat="p in navigationPluginConfs()"
+                                ng-controller="PluginLinkCtrl">
+
+                                <a href="#"
+                                   ng-click="currentNavigationPluginConf(p)">
+                                    <span ng-bind-html="repr" />
+                                </a>
+
+                            </li>
+                        </ul>
+
+                        <ul class="span6 nav nav-pills pull-right">
+                            <li class="pull-right">
+                                <button type="button"
+                                        para-tooltip="hide content"
+                                        class="close"
+                                        style="padding-top: 5px"
+                                        ng-style="currentContentPluginConf() == null ? {visibility : 'hidden'} : {}"
+                                        ng-click="currentContentPluginConf(null)">
+                                    <span class="icon-remove"></span>
+                                </button>
+                            </li>
+
+                            <li ng-class="{'active' : p == currentContentPluginConf()}"
+                                ng-style="contentPluginConfs().length <= 1 ? {visibility : 'hidden'} : {}"
+                                class="pull-right"
+                                ng-repeat="p in contentPluginConfs()"
+                                ng-controller="PluginLinkCtrl">
+
+                                <a href="#"
+                                   ng-click="currentContentPluginConf(p)">
+                                    <span ng-bind-html="repr" />
+                                </a>
+
+                            </li>
+                        </ul>
+		    		</p>
+			    </div>
+
+                <div kendo-splitter
+                     k-panes="[{collapsible: false, scrollable: false}, {collapsible: true, scrollable: false}]"
+                     para-plugin-canvas-container
+                     show-content="currentContentPluginConf() != null">
+                    <para-plugin-canvas class="navigation-plugin">
+                        <div class="plugin-loading-spinner"
+                             ng-class="{'plugin-loading' : navigationPluginLoading(), 'plugin-loading-failed' : navigationPluginLoadingFailed()}">
+                            <span></span>
+                            <span></span>
+                            <span></span>
+                            <br />
+                            <div ng-if="navigationPluginLoadingFailed()" class="label label-inverse">
+                                The dwarf in charge for fetching your data is on break.
+                                <br />
+                                Try again later.
+                            </div>
+                        </div>
+                        <div class="plugin"
+                             ng-class="{'plugin-loading' : navigationPluginLoading() || navigationPluginLoadingFailed()}"
+                             ng-include="navigationPluginTemplate"
+                             onload="currentNavigationPluginConf().onload()"></div>
+                    </para-plugin-canvas>
+                    <para-plugin-canvas class="content-plugin">
+                        <div class="plugin-loading-spinner"
+                             ng-class="{'plugin-loading' : contentPluginLoading(), 'plugin-loading-failed' : contentPluginLoadingFailed()}">
+                            <span></span>
+                            <span></span>
+                            <span></span>
+                            <br />
+                            <div ng-if="contentPluginLoadingFailed()" class="label label-inverse">
+                                The dwarf in charge for fetching your data is on break.
+                                <br />
+                                Try again later.
+                            </div>
+                        </div>
+                        <div class="plugin"
+                             ng-class="{'plugin-loading' : contentPluginLoading() || contentPluginLoadingFailed()}"
+                             ng-include="contentPluginTemplate"
+                             onload="currentContentPluginConf().onload()"></div>
+                    </para-plugin-canvas>
+                </div>
+            </div>
+
+		</div>
+	</body>
+</html>

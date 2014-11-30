@@ -1,0 +1,48 @@
+<p>
+    The application writer is responsible for providing the search options on the fly.
+    Why on the fly? If the search options include for example looking for IDs stored in your DB, it will be costly to query for all of them in advance. If the user will start typing "ID = 123" then only IDs starting with 123 should be queried.
+</p>
+<p>
+    The convention is to put all of the search options implementation code in search.py, and to have in __init__.py <code>from search import *</code>.
+</p>
+<p>
+    Implementing search is done as follows:
+    <br />
+    First, write <code>from parasite.search import Search</code>.
+    <br />
+    Then, you have to write a class which inherits from <code>Search</code>.
+    <br />
+    This class must have a static property called <code>APP_NAME</code>, which should hold the name of your application
+    (it must be the same name used when creating the client side application object - see <dev-a dev-ref="../../the application">the application</dev-a> section for more details).
+</p>
+<p>
+    This class should implement three class methods:
+<pre>
+@classmethod
+def _get_filters(cls):
+    ...
+
+@classmethod
+def _get_operators(cls, filter):
+    ...
+
+@classmethod
+def _get_values(cls, filter, operator, value_prefix):
+    ...
+</pre>
+    Each of these methods should return a list of strings.
+<p>
+</p>
+    <code>_get_filters</code> should return the available filters.
+</p>
+<p>
+    <code>_get_operators</code> should return the operators available for the given filter.
+</p>
+<p>
+    <code>_get_values</code> should return the values available for the given filter, operator, and the string the user has started typing for the value. e.g. - If the user has started typing <code>ID = 123</code>, the avialable values should be the IDs starting with 123.
+    <br />
+    Note: there's no reason to return all of the available options - 20 is enough.
+</p>
+<p>
+    That's it! all of the rest is handled automatically by parasite (in the server side and in the client side).
+</p>

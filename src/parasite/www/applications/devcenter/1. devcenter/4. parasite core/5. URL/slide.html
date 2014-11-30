@@ -1,0 +1,40 @@
+<p>
+    The <code>ParasiteURL</code> service (defined in <code>url_services.js</code>) is responsible for encoding the state of the site in the URL.
+    Changing some aspect of the state of the site causes changes in the URL, and changing the URL causes changes in the state.
+</p>
+<p>
+    This service is responsible both for accessing the URL, and for setting the appropriate <code>$watch</code>es so that everything keeps up in sync,
+    e.g. - if the user changes the current content plugin, a <code>$watch</code> will be triggered which makes sure to update the URL.
+</p>
+<p>
+    <code>ParasiteURL</code> encodes the following state in the URL:
+    <ul>
+        <li>
+            The current application's name.
+        </li>
+        <li>
+            The current navigation node's id.
+        </li>
+        <li>
+            The index of the navigation plugin the user has selected.
+        </li>
+        <li>
+            The index of the content plugin the user has selected.
+        </li>
+        <li>
+            The search query the user has entered in the search box (if the application enables search).
+        </li>
+        <li>
+            The sort the user has performed.
+        </li>
+    </ul>
+</p>
+<p>
+    Although accessing and modifing the site's state is possible using the <code>ParasiteURL</code> service, this is not the recommended way, as it makes testing harder.
+    A more appropriate way (whenever possible) is to access the service which is actually responsible for the state, e.g. - Changing the current navigation node should be done
+    using the <code>Navigation</code> service . There are situations where using the <code>Navigation</code> service is not an option, e.g. - when the site loads for the first time,
+    the URL might contain the id of the navigation node which the user wants to access, so the application writer must access the <code>ParasiteURL</code> service  directly.
+</p>
+<p>
+    Accessing all of these is documented in the code itself.
+</p>

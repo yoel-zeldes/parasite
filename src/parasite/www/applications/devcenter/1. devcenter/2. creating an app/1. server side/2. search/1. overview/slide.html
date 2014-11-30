@@ -1,0 +1,30 @@
+<p>
+    An application can support search. If it supports it, the parasite framework automatically puts a search bar (using select2) with autocomplete for the search options.
+</p>
+<p>
+    The search query contains search items. Each search item contains a filter, an operator and a value, e.g - <code>ID = 123</code> is translated to <code>filter = "ID"</code>, <code>operator = "="</code>, <code>value = "123"</code>
+</p>
+<p>
+    The user can search for multiple search items in his query.
+</p>
+<p>
+    Parasite takes care for a lot of things for you - including the GUI, the client side code, and the server side code.
+    <br />
+    The flow of searching is as follows:
+    <ol>
+        <li>
+            The user starts typing his search query. Parasite provides autocomplete of the search items based on the search options your application provides.
+        </li>
+        <li>
+            The user finishes typing the search query, and hits the search button.
+            <br />
+            Parasite automatically calls the application's <code>getNavigationModel</code> function (with <code>update</code> as true) in order to construct the navigation model based on the search query.
+            <br />
+            You should handle this query both in the client side (read more about it at <dev-a dev-ref="../../../the application">the application</dev-a> section), and in the server side.
+        </li>
+    </ol>
+</p>
+<p>
+    The user can also perform sort (if supported by the navigation plugin. The table navigation plugin for instance supports it).
+    In order to support it, you should both support it in the client side in <dev-a dev-ref="../../../the application">the application</dev-a>, as well as in the server side.
+</p>

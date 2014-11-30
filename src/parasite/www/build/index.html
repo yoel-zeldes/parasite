@@ -1,0 +1,655 @@
+<html ng-app="parasiteApp">
+	<head>
+        <!-- inject:css -->
+        <link rel="stylesheet" href="/www/homepage/parasite.css">
+        <link rel="stylesheet" href="/www/applications/utils/directives.css">
+        <link rel="stylesheet" href="/www/external/d3-tip/parasite-d3-tip.css">
+        <link rel="stylesheet" href="/www/external/fontawesome/font-awesome.min.css">
+        <link rel="stylesheet" href="/www/external/select2-3.4.0/select2-bootstrap.css">
+        <link rel="stylesheet" href="/www/external/select2-3.4.0/select2.css">
+        <link rel="stylesheet" href="/www/external/bootstrap-2.2.2/bootstrap.css">
+        <link rel="stylesheet" href="/www/applications/utils/pie/directive_pie.css">
+        <link rel="stylesheet" href="/www/external/kendoui.web/styles/kendo.black.min.css">
+        <link rel="stylesheet" href="/www/external/kendoui.web/styles/kendo.blueopal.min.css">
+        <link rel="stylesheet" href="/www/external/kendoui.web/styles/kendo.bootstrap.min.css">
+        <link rel="stylesheet" href="/www/external/kendoui.web/styles/kendo.common.min.css">
+        <link rel="stylesheet" href="/www/external/kendoui.web/styles/kendo.default.min.css">
+        <link rel="stylesheet" href="/www/external/kendoui.web/styles/kendo.flat.min.css">
+        <link rel="stylesheet" href="/www/external/kendoui.web/styles/kendo.highcontrast.min.css">
+        <link rel="stylesheet" href="/www/external/kendoui.web/styles/kendo.metro.min.css">
+        <link rel="stylesheet" href="/www/external/kendoui.web/styles/kendo.metroblack.min.css">
+        <link rel="stylesheet" href="/www/external/kendoui.web/styles/kendo.moonlight.min.css">
+        <link rel="stylesheet" href="/www/external/kendoui.web/styles/kendo.rtl.min.css">
+        <link rel="stylesheet" href="/www/external/kendoui.web/styles/kendo.silver.min.css">
+        <link rel="stylesheet" href="/www/external/kendoui.web/styles/kendo.uniform.min.css">
+        <link rel="stylesheet" href="/www/applications/general/plugins/circles/circles.css">
+        <link rel="stylesheet" href="/www/applications/general/plugins/tree/tree.css">
+        <!-- endinject -->
+
+        <!-- inject:js -->
+        <script src="/www/external/jquery-1.9.0/jquery.min.js"></script>
+        <script src="/www/external/angular-1.2.1/angular.js"></script>
+        <script src="/www/external/kendoui.web/js/kendo.web.min.js"></script>
+        <script src="/www/external/d3/d3.v3.js"></script>
+        <script src="/www/external/d3-tip/index.js"></script>
+        <script src="/www/external/angular-1.2.1/angular-animate.js"></script>
+        <script src="/www/external/angular-1.2.1/angular-resource.js"></script>
+        <script src="/www/external/angular-ui/ui-bootstrap-tpls-0.11.0.js"></script>
+        <script src="/www/external/class/class.js"></script>
+        <script src="/www/external/angular-kendo/angular-kendo.js"></script>
+        <script src="/www/external/highcharts/highcharts3.js"></script>
+        <script src="/www/external/highcharts-ng/highcharts-ng.js"></script>
+        <script src="/www/external/select2-3.4.0/select2.js"></script>
+        <script src="/www/external/select2-ui/select2-ui.js"></script>
+        <script src="/www/external/bootstrap-2.2.2/bootstrap.min.js"></script>
+        <script src="/www/external/kendoui.web/js/kendo.autocomplete.min.js"></script>
+        <script src="/www/external/kendoui.web/js/kendo.binder.min.js"></script>
+        <script src="/www/external/kendoui.web/js/kendo.calendar.min.js"></script>
+        <script src="/www/external/kendoui.web/js/kendo.colorpicker.min.js"></script>
+        <script src="/www/external/kendoui.web/js/kendo.columnmenu.min.js"></script>
+        <script src="/www/external/kendoui.web/js/kendo.combobox.min.js"></script>
+        <script src="/www/external/kendoui.web/js/kendo.core.min.js"></script>
+        <script src="/www/external/kendoui.web/js/kendo.data.min.js"></script>
+        <script src="/www/external/kendoui.web/js/kendo.data.odata.min.js"></script>
+        <script src="/www/external/kendoui.web/js/kendo.data.xml.min.js"></script>
+        <script src="/www/external/kendoui.web/js/kendo.datepicker.min.js"></script>
+        <script src="/www/external/kendoui.web/js/kendo.datetimepicker.min.js"></script>
+        <script src="/www/external/kendoui.web/js/kendo.draganddrop.min.js"></script>
+        <script src="/www/external/kendoui.web/js/kendo.dropdownlist.min.js"></script>
+        <script src="/www/external/kendoui.web/js/kendo.editable.min.js"></script>
+        <script src="/www/external/kendoui.web/js/kendo.editor.min.js"></script>
+        <script src="/www/external/kendoui.web/js/kendo.filtermenu.min.js"></script>
+        <script src="/www/external/kendoui.web/js/kendo.fx.min.js"></script>
+        <script src="/www/external/kendoui.web/js/kendo.grid.min.js"></script>
+        <script src="/www/external/kendoui.web/js/kendo.groupable.min.js"></script>
+        <script src="/www/external/kendoui.web/js/kendo.imagebrowser.min.js"></script>
+        <script src="/www/external/kendoui.web/js/kendo.list.min.js"></script>
+        <script src="/www/external/kendoui.web/js/kendo.listview.min.js"></script>
+        <script src="/www/external/kendoui.web/js/kendo.menu.min.js"></script>
+        <script src="/www/external/kendoui.web/js/kendo.mobile.scroller.min.js"></script>
+        <script src="/www/external/kendoui.web/js/kendo.multiselect.min.js"></script>
+        <script src="/www/external/kendoui.web/js/kendo.numerictextbox.min.js"></script>
+        <script src="/www/external/kendoui.web/js/kendo.pager.min.js"></script>
+        <script src="/www/external/kendoui.web/js/kendo.panelbar.min.js"></script>
+        <script src="/www/external/kendoui.web/js/kendo.popup.min.js"></script>
+        <script src="/www/external/kendoui.web/js/kendo.reorderable.min.js"></script>
+        <script src="/www/external/kendoui.web/js/kendo.resizable.min.js"></script>
+        <script src="/www/external/kendoui.web/js/kendo.router.min.js"></script>
+        <script src="/www/external/kendoui.web/js/kendo.scheduler.agendaview.min.js"></script>
+        <script src="/www/external/kendoui.web/js/kendo.scheduler.dayview.min.js"></script>
+        <script src="/www/external/kendoui.web/js/kendo.scheduler.min.js"></script>
+        <script src="/www/external/kendoui.web/js/kendo.scheduler.monthview.min.js"></script>
+        <script src="/www/external/kendoui.web/js/kendo.scheduler.recurrence.min.js"></script>
+        <script src="/www/external/kendoui.web/js/kendo.scheduler.view.min.js"></script>
+        <script src="/www/external/kendoui.web/js/kendo.selectable.min.js"></script>
+        <script src="/www/external/kendoui.web/js/kendo.slider.min.js"></script>
+        <script src="/www/external/kendoui.web/js/kendo.sortable.min.js"></script>
+        <script src="/www/external/kendoui.web/js/kendo.splitter.min.js"></script>
+        <script src="/www/external/kendoui.web/js/kendo.tabstrip.min.js"></script>
+        <script src="/www/external/kendoui.web/js/kendo.timepicker.min.js"></script>
+        <script src="/www/external/kendoui.web/js/kendo.timezones.min.js"></script>
+        <script src="/www/external/kendoui.web/js/kendo.tooltip.min.js"></script>
+        <script src="/www/external/kendoui.web/js/kendo.treeview.min.js"></script>
+        <script src="/www/external/kendoui.web/js/kendo.upload.min.js"></script>
+        <script src="/www/external/kendoui.web/js/kendo.userevents.min.js"></script>
+        <script src="/www/external/kendoui.web/js/kendo.validator.min.js"></script>
+        <script src="/www/external/kendoui.web/js/kendo.view.min.js"></script>
+        <script src="/www/external/kendoui.web/js/kendo.window.min.js"></script>
+        <script src="/www/external/kendoui.web/js/cultures/kendo.culture.af-ZA.min.js"></script>
+        <script src="/www/external/kendoui.web/js/cultures/kendo.culture.af.min.js"></script>
+        <script src="/www/external/kendoui.web/js/cultures/kendo.culture.am-ET.min.js"></script>
+        <script src="/www/external/kendoui.web/js/cultures/kendo.culture.am.min.js"></script>
+        <script src="/www/external/kendoui.web/js/cultures/kendo.culture.ar-AE.min.js"></script>
+        <script src="/www/external/kendoui.web/js/cultures/kendo.culture.ar-BH.min.js"></script>
+        <script src="/www/external/kendoui.web/js/cultures/kendo.culture.ar-DZ.min.js"></script>
+        <script src="/www/external/kendoui.web/js/cultures/kendo.culture.ar-EG.min.js"></script>
+        <script src="/www/external/kendoui.web/js/cultures/kendo.culture.ar-IQ.min.js"></script>
+        <script src="/www/external/kendoui.web/js/cultures/kendo.culture.ar-JO.min.js"></script>
+        <script src="/www/external/kendoui.web/js/cultures/kendo.culture.ar-KW.min.js"></script>
+        <script src="/www/external/kendoui.web/js/cultures/kendo.culture.ar-LB.min.js"></script>
+        <script src="/www/external/kendoui.web/js/cultures/kendo.culture.ar-LY.min.js"></script>
+        <script src="/www/external/kendoui.web/js/cultures/kendo.culture.ar-MA.min.js"></script>
+        <script src="/www/external/kendoui.web/js/cultures/kendo.culture.ar-OM.min.js"></script>
+        <script src="/www/external/kendoui.web/js/cultures/kendo.culture.ar-QA.min.js"></script>
+        <script src="/www/external/kendoui.web/js/cultures/kendo.culture.ar-SA.min.js"></script>
+        <script src="/www/external/kendoui.web/js/cultures/kendo.culture.ar-SY.min.js"></script>
+        <script src="/www/external/kendoui.web/js/cultures/kendo.culture.ar-TN.min.js"></script>
+        <script src="/www/external/kendoui.web/js/cultures/kendo.culture.ar-YE.min.js"></script>
+        <script src="/www/external/kendoui.web/js/cultures/kendo.culture.ar.min.js"></script>
+        <script src="/www/external/kendoui.web/js/cultures/kendo.culture.arn-CL.min.js"></script>
+        <script src="/www/external/kendoui.web/js/cultures/kendo.culture.arn.min.js"></script>
+        <script src="/www/external/kendoui.web/js/cultures/kendo.culture.as-IN.min.js"></script>
+        <script src="/www/external/kendoui.web/js/cultures/kendo.culture.as.min.js"></script>
+        <script src="/www/external/kendoui.web/js/cultures/kendo.culture.az-Cyrl-AZ.min.js"></script>
+        <script src="/www/external/kendoui.web/js/cultures/kendo.culture.az-Cyrl.min.js"></script>
+        <script src="/www/external/kendoui.web/js/cultures/kendo.culture.az-Latn-AZ.min.js"></script>
+        <script src="/www/external/kendoui.web/js/cultures/kendo.culture.az-Latn.min.js"></script>
+        <script src="/www/external/kendoui.web/js/cultures/kendo.culture.az.min.js"></script>
+        <script src="/www/external/kendoui.web/js/cultures/kendo.culture.ba-RU.min.js"></script>
+        <script src="/www/external/kendoui.web/js/cultures/kendo.culture.ba.min.js"></script>
+        <script src="/www/external/kendoui.web/js/cultures/kendo.culture.be-BY.min.js"></script>
+        <script src="/www/external/kendoui.web/js/cultures/kendo.culture.be.min.js"></script>
+        <script src="/www/external/kendoui.web/js/cultures/kendo.culture.bg-BG.min.js"></script>
+        <script src="/www/external/kendoui.web/js/cultures/kendo.culture.bg.min.js"></script>
+        <script src="/www/external/kendoui.web/js/cultures/kendo.culture.bn-BD.min.js"></script>
+        <script src="/www/external/kendoui.web/js/cultures/kendo.culture.bn-IN.min.js"></script>
+        <script src="/www/external/kendoui.web/js/cultures/kendo.culture.bn.min.js"></script>
+        <script src="/www/external/kendoui.web/js/cultures/kendo.culture.bo-CN.min.js"></script>
+        <script src="/www/external/kendoui.web/js/cultures/kendo.culture.bo.min.js"></script>
+        <script src="/www/external/kendoui.web/js/cultures/kendo.culture.br-FR.min.js"></script>
+        <script src="/www/external/kendoui.web/js/cultures/kendo.culture.br.min.js"></script>
+        <script src="/www/external/kendoui.web/js/cultures/kendo.culture.bs-Cyrl-BA.min.js"></script>
+        <script src="/www/external/kendoui.web/js/cultures/kendo.culture.bs-Cyrl.min.js"></script>
+        <script src="/www/external/kendoui.web/js/cultures/kendo.culture.bs-Latn-BA.min.js"></script>
+        <script src="/www/external/kendoui.web/js/cultures/kendo.culture.bs-Latn.min.js"></script>
+        <script src="/www/external/kendoui.web/js/cultures/kendo.culture.bs.min.js"></script>
+        <script src="/www/external/kendoui.web/js/cultures/kendo.culture.ca-ES.min.js"></script>
+        <script src="/www/external/kendoui.web/js/cultures/kendo.culture.ca.min.js"></script>
+        <script src="/www/external/kendoui.web/js/cultures/kendo.culture.co-FR.min.js"></script>
+        <script src="/www/external/kendoui.web/js/cultures/kendo.culture.co.min.js"></script>
+        <script src="/www/external/kendoui.web/js/cultures/kendo.culture.cs-CZ.min.js"></script>
+        <script src="/www/external/kendoui.web/js/cultures/kendo.culture.cs.min.js"></script>
+        <script src="/www/external/kendoui.web/js/cultures/kendo.culture.cy-GB.min.js"></script>
+        <script src="/www/external/kendoui.web/js/cultures/kendo.culture.cy.min.js"></script>
+        <script src="/www/external/kendoui.web/js/cultures/kendo.culture.da-DK.min.js"></script>
+        <script src="/www/external/kendoui.web/js/cultures/kendo.culture.da.min.js"></script>
+        <script src="/www/external/kendoui.web/js/cultures/kendo.culture.de-AT.min.js"></script>
+        <script src="/www/external/kendoui.web/js/cultures/kendo.culture.de-CH.min.js"></script>
+        <script src="/www/external/kendoui.web/js/cultures/kendo.culture.de-DE.min.js"></script>
+        <script src="/www/external/kendoui.web/js/cultures/kendo.culture.de-LI.min.js"></script>
+        <script src="/www/external/kendoui.web/js/cultures/kendo.culture.de-LU.min.js"></script>
+        <script src="/www/external/kendoui.web/js/cultures/kendo.culture.de.min.js"></script>
+        <script src="/www/external/kendoui.web/js/cultures/kendo.culture.dsb-DE.min.js"></script>
+        <script src="/www/external/kendoui.web/js/cultures/kendo.culture.dsb.min.js"></script>
+        <script src="/www/external/kendoui.web/js/cultures/kendo.culture.dv-MV.min.js"></script>
+        <script src="/www/external/kendoui.web/js/cultures/kendo.culture.dv.min.js"></script>
+        <script src="/www/external/kendoui.web/js/cultures/kendo.culture.el-GR.min.js"></script>
+        <script src="/www/external/kendoui.web/js/cultures/kendo.culture.el.min.js"></script>
+        <script src="/www/external/kendoui.web/js/cultures/kendo.culture.en-029.min.js"></script>
+        <script src="/www/external/kendoui.web/js/cultures/kendo.culture.en-AU.min.js"></script>
+        <script src="/www/external/kendoui.web/js/cultures/kendo.culture.en-BZ.min.js"></script>
+        <script src="/www/external/kendoui.web/js/cultures/kendo.culture.en-CA.min.js"></script>
+        <script src="/www/external/kendoui.web/js/cultures/kendo.culture.en-GB.min.js"></script>
+        <script src="/www/external/kendoui.web/js/cultures/kendo.culture.en-IE.min.js"></script>
+        <script src="/www/external/kendoui.web/js/cultures/kendo.culture.en-IN.min.js"></script>
+        <script src="/www/external/kendoui.web/js/cultures/kendo.culture.en-JM.min.js"></script>
+        <script src="/www/external/kendoui.web/js/cultures/kendo.culture.en-MY.min.js"></script>
+        <script src="/www/external/kendoui.web/js/cultures/kendo.culture.en-NZ.min.js"></script>
+        <script src="/www/external/kendoui.web/js/cultures/kendo.culture.en-PH.min.js"></script>
+        <script src="/www/external/kendoui.web/js/cultures/kendo.culture.en-SG.min.js"></script>
+        <script src="/www/external/kendoui.web/js/cultures/kendo.culture.en-TT.min.js"></script>
+        <script src="/www/external/kendoui.web/js/cultures/kendo.culture.en-US.min.js"></script>
+        <script src="/www/external/kendoui.web/js/cultures/kendo.culture.en-ZA.min.js"></script>
+        <script src="/www/external/kendoui.web/js/cultures/kendo.culture.en-ZW.min.js"></script>
+        <script src="/www/external/kendoui.web/js/cultures/kendo.culture.en.min.js"></script>
+        <script src="/www/external/kendoui.web/js/cultures/kendo.culture.es-AR.min.js"></script>
+        <script src="/www/external/kendoui.web/js/cultures/kendo.culture.es-BO.min.js"></script>
+        <script src="/www/external/kendoui.web/js/cultures/kendo.culture.es-CL.min.js"></script>
+        <script src="/www/external/kendoui.web/js/cultures/kendo.culture.es-CO.min.js"></script>
+        <script src="/www/external/kendoui.web/js/cultures/kendo.culture.es-CR.min.js"></script>
+        <script src="/www/external/kendoui.web/js/cultures/kendo.culture.es-DO.min.js"></script>
+        <script src="/www/external/kendoui.web/js/cultures/kendo.culture.es-EC.min.js"></script>
+        <script src="/www/external/kendoui.web/js/cultures/kendo.culture.es-ES.min.js"></script>
+        <script src="/www/external/kendoui.web/js/cultures/kendo.culture.es-GT.min.js"></script>
+        <script src="/www/external/kendoui.web/js/cultures/kendo.culture.es-HN.min.js"></script>
+        <script src="/www/external/kendoui.web/js/cultures/kendo.culture.es-MX.min.js"></script>
+        <script src="/www/external/kendoui.web/js/cultures/kendo.culture.es-NI.min.js"></script>
+        <script src="/www/external/kendoui.web/js/cultures/kendo.culture.es-PA.min.js"></script>
+        <script src="/www/external/kendoui.web/js/cultures/kendo.culture.es-PE.min.js"></script>
+        <script src="/www/external/kendoui.web/js/cultures/kendo.culture.es-PR.min.js"></script>
+        <script src="/www/external/kendoui.web/js/cultures/kendo.culture.es-PY.min.js"></script>
+        <script src="/www/external/kendoui.web/js/cultures/kendo.culture.es-SV.min.js"></script>
+        <script src="/www/external/kendoui.web/js/cultures/kendo.culture.es-US.min.js"></script>
+        <script src="/www/external/kendoui.web/js/cultures/kendo.culture.es-UY.min.js"></script>
+        <script src="/www/external/kendoui.web/js/cultures/kendo.culture.es-VE.min.js"></script>
+        <script src="/www/external/kendoui.web/js/cultures/kendo.culture.es.min.js"></script>
+        <script src="/www/external/kendoui.web/js/cultures/kendo.culture.et-EE.min.js"></script>
+        <script src="/www/external/kendoui.web/js/cultures/kendo.culture.et.min.js"></script>
+        <script src="/www/external/kendoui.web/js/cultures/kendo.culture.eu-ES.min.js"></script>
+        <script src="/www/external/kendoui.web/js/cultures/kendo.culture.eu.min.js"></script>
+        <script src="/www/external/kendoui.web/js/cultures/kendo.culture.fa-IR.min.js"></script>
+        <script src="/www/external/kendoui.web/js/cultures/kendo.culture.fa.min.js"></script>
+        <script src="/www/external/kendoui.web/js/cultures/kendo.culture.fi-FI.min.js"></script>
+        <script src="/www/external/kendoui.web/js/cultures/kendo.culture.fi.min.js"></script>
+        <script src="/www/external/kendoui.web/js/cultures/kendo.culture.fil-PH.min.js"></script>
+        <script src="/www/external/kendoui.web/js/cultures/kendo.culture.fil.min.js"></script>
+        <script src="/www/external/kendoui.web/js/cultures/kendo.culture.fo-FO.min.js"></script>
+        <script src="/www/external/kendoui.web/js/cultures/kendo.culture.fo.min.js"></script>
+        <script src="/www/external/kendoui.web/js/cultures/kendo.culture.fr-BE.min.js"></script>
+        <script src="/www/external/kendoui.web/js/cultures/kendo.culture.fr-CA.min.js"></script>
+        <script src="/www/external/kendoui.web/js/cultures/kendo.culture.fr-CH.min.js"></script>
+        <script src="/www/external/kendoui.web/js/cultures/kendo.culture.fr-FR.min.js"></script>
+        <script src="/www/external/kendoui.web/js/cultures/kendo.culture.fr-LU.min.js"></script>
+        <script src="/www/external/kendoui.web/js/cultures/kendo.culture.fr-MC.min.js"></script>
+        <script src="/www/external/kendoui.web/js/cultures/kendo.culture.fr.min.js"></script>
+        <script src="/www/external/kendoui.web/js/cultures/kendo.culture.fy-NL.min.js"></script>
+        <script src="/www/external/kendoui.web/js/cultures/kendo.culture.fy.min.js"></script>
+        <script src="/www/external/kendoui.web/js/cultures/kendo.culture.ga-IE.min.js"></script>
+        <script src="/www/external/kendoui.web/js/cultures/kendo.culture.ga.min.js"></script>
+        <script src="/www/external/kendoui.web/js/cultures/kendo.culture.gd-GB.min.js"></script>
+        <script src="/www/external/kendoui.web/js/cultures/kendo.culture.gd.min.js"></script>
+        <script src="/www/external/kendoui.web/js/cultures/kendo.culture.gl-ES.min.js"></script>
+        <script src="/www/external/kendoui.web/js/cultures/kendo.culture.gl.min.js"></script>
+        <script src="/www/external/kendoui.web/js/cultures/kendo.culture.gsw-FR.min.js"></script>
+        <script src="/www/external/kendoui.web/js/cultures/kendo.culture.gsw.min.js"></script>
+        <script src="/www/external/kendoui.web/js/cultures/kendo.culture.gu-IN.min.js"></script>
+        <script src="/www/external/kendoui.web/js/cultures/kendo.culture.gu.min.js"></script>
+        <script src="/www/external/kendoui.web/js/cultures/kendo.culture.ha-Latn-NG.min.js"></script>
+        <script src="/www/external/kendoui.web/js/cultures/kendo.culture.ha-Latn.min.js"></script>
+        <script src="/www/external/kendoui.web/js/cultures/kendo.culture.ha.min.js"></script>
+        <script src="/www/external/kendoui.web/js/cultures/kendo.culture.he-IL.min.js"></script>
+        <script src="/www/external/kendoui.web/js/cultures/kendo.culture.he.min.js"></script>
+        <script src="/www/external/kendoui.web/js/cultures/kendo.culture.hi-IN.min.js"></script>
+        <script src="/www/external/kendoui.web/js/cultures/kendo.culture.hi.min.js"></script>
+        <script src="/www/external/kendoui.web/js/cultures/kendo.culture.hr-BA.min.js"></script>
+        <script src="/www/external/kendoui.web/js/cultures/kendo.culture.hr-HR.min.js"></script>
+        <script src="/www/external/kendoui.web/js/cultures/kendo.culture.hr.min.js"></script>
+        <script src="/www/external/kendoui.web/js/cultures/kendo.culture.hsb-DE.min.js"></script>
+        <script src="/www/external/kendoui.web/js/cultures/kendo.culture.hsb.min.js"></script>
+        <script src="/www/external/kendoui.web/js/cultures/kendo.culture.hu-HU.min.js"></script>
+        <script src="/www/external/kendoui.web/js/cultures/kendo.culture.hu.min.js"></script>
+        <script src="/www/external/kendoui.web/js/cultures/kendo.culture.hy-AM.min.js"></script>
+        <script src="/www/external/kendoui.web/js/cultures/kendo.culture.hy.min.js"></script>
+        <script src="/www/external/kendoui.web/js/cultures/kendo.culture.id-ID.min.js"></script>
+        <script src="/www/external/kendoui.web/js/cultures/kendo.culture.id.min.js"></script>
+        <script src="/www/external/kendoui.web/js/cultures/kendo.culture.ig-NG.min.js"></script>
+        <script src="/www/external/kendoui.web/js/cultures/kendo.culture.ig.min.js"></script>
+        <script src="/www/external/kendoui.web/js/cultures/kendo.culture.ii-CN.min.js"></script>
+        <script src="/www/external/kendoui.web/js/cultures/kendo.culture.ii.min.js"></script>
+        <script src="/www/external/kendoui.web/js/cultures/kendo.culture.is-IS.min.js"></script>
+        <script src="/www/external/kendoui.web/js/cultures/kendo.culture.is.min.js"></script>
+        <script src="/www/external/kendoui.web/js/cultures/kendo.culture.it-CH.min.js"></script>
+        <script src="/www/external/kendoui.web/js/cultures/kendo.culture.it-IT.min.js"></script>
+        <script src="/www/external/kendoui.web/js/cultures/kendo.culture.it.min.js"></script>
+        <script src="/www/external/kendoui.web/js/cultures/kendo.culture.iu-Cans-CA.min.js"></script>
+        <script src="/www/external/kendoui.web/js/cultures/kendo.culture.iu-Cans.min.js"></script>
+        <script src="/www/external/kendoui.web/js/cultures/kendo.culture.iu-Latn-CA.min.js"></script>
+        <script src="/www/external/kendoui.web/js/cultures/kendo.culture.iu-Latn.min.js"></script>
+        <script src="/www/external/kendoui.web/js/cultures/kendo.culture.iu.min.js"></script>
+        <script src="/www/external/kendoui.web/js/cultures/kendo.culture.ja-JP.min.js"></script>
+        <script src="/www/external/kendoui.web/js/cultures/kendo.culture.ja.min.js"></script>
+        <script src="/www/external/kendoui.web/js/cultures/kendo.culture.ka-GE.min.js"></script>
+        <script src="/www/external/kendoui.web/js/cultures/kendo.culture.ka.min.js"></script>
+        <script src="/www/external/kendoui.web/js/cultures/kendo.culture.kk-KZ.min.js"></script>
+        <script src="/www/external/kendoui.web/js/cultures/kendo.culture.kk.min.js"></script>
+        <script src="/www/external/kendoui.web/js/cultures/kendo.culture.kl-GL.min.js"></script>
+        <script src="/www/external/kendoui.web/js/cultures/kendo.culture.kl.min.js"></script>
+        <script src="/www/external/kendoui.web/js/cultures/kendo.culture.km-KH.min.js"></script>
+        <script src="/www/external/kendoui.web/js/cultures/kendo.culture.km.min.js"></script>
+        <script src="/www/external/kendoui.web/js/cultures/kendo.culture.kn-IN.min.js"></script>
+        <script src="/www/external/kendoui.web/js/cultures/kendo.culture.kn.min.js"></script>
+        <script src="/www/external/kendoui.web/js/cultures/kendo.culture.ko-KR.min.js"></script>
+        <script src="/www/external/kendoui.web/js/cultures/kendo.culture.ko.min.js"></script>
+        <script src="/www/external/kendoui.web/js/cultures/kendo.culture.kok-IN.min.js"></script>
+        <script src="/www/external/kendoui.web/js/cultures/kendo.culture.kok.min.js"></script>
+        <script src="/www/external/kendoui.web/js/cultures/kendo.culture.ky-KG.min.js"></script>
+        <script src="/www/external/kendoui.web/js/cultures/kendo.culture.ky.min.js"></script>
+        <script src="/www/external/kendoui.web/js/cultures/kendo.culture.lb-LU.min.js"></script>
+        <script src="/www/external/kendoui.web/js/cultures/kendo.culture.lb.min.js"></script>
+        <script src="/www/external/kendoui.web/js/cultures/kendo.culture.lo-LA.min.js"></script>
+        <script src="/www/external/kendoui.web/js/cultures/kendo.culture.lo.min.js"></script>
+        <script src="/www/external/kendoui.web/js/cultures/kendo.culture.lt-LT.min.js"></script>
+        <script src="/www/external/kendoui.web/js/cultures/kendo.culture.lt.min.js"></script>
+        <script src="/www/external/kendoui.web/js/cultures/kendo.culture.lv-LV.min.js"></script>
+        <script src="/www/external/kendoui.web/js/cultures/kendo.culture.lv.min.js"></script>
+        <script src="/www/external/kendoui.web/js/cultures/kendo.culture.mi-NZ.min.js"></script>
+        <script src="/www/external/kendoui.web/js/cultures/kendo.culture.mi.min.js"></script>
+        <script src="/www/external/kendoui.web/js/cultures/kendo.culture.mk-MK.min.js"></script>
+        <script src="/www/external/kendoui.web/js/cultures/kendo.culture.mk.min.js"></script>
+        <script src="/www/external/kendoui.web/js/cultures/kendo.culture.ml-IN.min.js"></script>
+        <script src="/www/external/kendoui.web/js/cultures/kendo.culture.ml.min.js"></script>
+        <script src="/www/external/kendoui.web/js/cultures/kendo.culture.mn-Cyrl.min.js"></script>
+        <script src="/www/external/kendoui.web/js/cultures/kendo.culture.mn-MN.min.js"></script>
+        <script src="/www/external/kendoui.web/js/cultures/kendo.culture.mn-Mong-CN.min.js"></script>
+        <script src="/www/external/kendoui.web/js/cultures/kendo.culture.mn-Mong.min.js"></script>
+        <script src="/www/external/kendoui.web/js/cultures/kendo.culture.mn.min.js"></script>
+        <script src="/www/external/kendoui.web/js/cultures/kendo.culture.moh-CA.min.js"></script>
+        <script src="/www/external/kendoui.web/js/cultures/kendo.culture.moh.min.js"></script>
+        <script src="/www/external/kendoui.web/js/cultures/kendo.culture.mr-IN.min.js"></script>
+        <script src="/www/external/kendoui.web/js/cultures/kendo.culture.mr.min.js"></script>
+        <script src="/www/external/kendoui.web/js/cultures/kendo.culture.ms-BN.min.js"></script>
+        <script src="/www/external/kendoui.web/js/cultures/kendo.culture.ms-MY.min.js"></script>
+        <script src="/www/external/kendoui.web/js/cultures/kendo.culture.ms.min.js"></script>
+        <script src="/www/external/kendoui.web/js/cultures/kendo.culture.mt-MT.min.js"></script>
+        <script src="/www/external/kendoui.web/js/cultures/kendo.culture.mt.min.js"></script>
+        <script src="/www/external/kendoui.web/js/cultures/kendo.culture.nb-NO.min.js"></script>
+        <script src="/www/external/kendoui.web/js/cultures/kendo.culture.nb.min.js"></script>
+        <script src="/www/external/kendoui.web/js/cultures/kendo.culture.ne-NP.min.js"></script>
+        <script src="/www/external/kendoui.web/js/cultures/kendo.culture.ne.min.js"></script>
+        <script src="/www/external/kendoui.web/js/cultures/kendo.culture.nl-BE.min.js"></script>
+        <script src="/www/external/kendoui.web/js/cultures/kendo.culture.nl-NL.min.js"></script>
+        <script src="/www/external/kendoui.web/js/cultures/kendo.culture.nl.min.js"></script>
+        <script src="/www/external/kendoui.web/js/cultures/kendo.culture.nn-NO.min.js"></script>
+        <script src="/www/external/kendoui.web/js/cultures/kendo.culture.nn.min.js"></script>
+        <script src="/www/external/kendoui.web/js/cultures/kendo.culture.no.min.js"></script>
+        <script src="/www/external/kendoui.web/js/cultures/kendo.culture.nso-ZA.min.js"></script>
+        <script src="/www/external/kendoui.web/js/cultures/kendo.culture.nso.min.js"></script>
+        <script src="/www/external/kendoui.web/js/cultures/kendo.culture.oc-FR.min.js"></script>
+        <script src="/www/external/kendoui.web/js/cultures/kendo.culture.oc.min.js"></script>
+        <script src="/www/external/kendoui.web/js/cultures/kendo.culture.or-IN.min.js"></script>
+        <script src="/www/external/kendoui.web/js/cultures/kendo.culture.or.min.js"></script>
+        <script src="/www/external/kendoui.web/js/cultures/kendo.culture.pa-IN.min.js"></script>
+        <script src="/www/external/kendoui.web/js/cultures/kendo.culture.pa.min.js"></script>
+        <script src="/www/external/kendoui.web/js/cultures/kendo.culture.pl-PL.min.js"></script>
+        <script src="/www/external/kendoui.web/js/cultures/kendo.culture.pl.min.js"></script>
+        <script src="/www/external/kendoui.web/js/cultures/kendo.culture.prs-AF.min.js"></script>
+        <script src="/www/external/kendoui.web/js/cultures/kendo.culture.prs.min.js"></script>
+        <script src="/www/external/kendoui.web/js/cultures/kendo.culture.ps-AF.min.js"></script>
+        <script src="/www/external/kendoui.web/js/cultures/kendo.culture.ps.min.js"></script>
+        <script src="/www/external/kendoui.web/js/cultures/kendo.culture.pt-BR.min.js"></script>
+        <script src="/www/external/kendoui.web/js/cultures/kendo.culture.pt-PT.min.js"></script>
+        <script src="/www/external/kendoui.web/js/cultures/kendo.culture.pt.min.js"></script>
+        <script src="/www/external/kendoui.web/js/cultures/kendo.culture.qut-GT.min.js"></script>
+        <script src="/www/external/kendoui.web/js/cultures/kendo.culture.qut.min.js"></script>
+        <script src="/www/external/kendoui.web/js/cultures/kendo.culture.quz-BO.min.js"></script>
+        <script src="/www/external/kendoui.web/js/cultures/kendo.culture.quz-EC.min.js"></script>
+        <script src="/www/external/kendoui.web/js/cultures/kendo.culture.quz-PE.min.js"></script>
+        <script src="/www/external/kendoui.web/js/cultures/kendo.culture.quz.min.js"></script>
+        <script src="/www/external/kendoui.web/js/cultures/kendo.culture.rm-CH.min.js"></script>
+        <script src="/www/external/kendoui.web/js/cultures/kendo.culture.rm.min.js"></script>
+        <script src="/www/external/kendoui.web/js/cultures/kendo.culture.ro-RO.min.js"></script>
+        <script src="/www/external/kendoui.web/js/cultures/kendo.culture.ro.min.js"></script>
+        <script src="/www/external/kendoui.web/js/cultures/kendo.culture.ru-RU.min.js"></script>
+        <script src="/www/external/kendoui.web/js/cultures/kendo.culture.ru-UA.min.js"></script>
+        <script src="/www/external/kendoui.web/js/cultures/kendo.culture.ru.min.js"></script>
+        <script src="/www/external/kendoui.web/js/cultures/kendo.culture.rw-RW.min.js"></script>
+        <script src="/www/external/kendoui.web/js/cultures/kendo.culture.rw.min.js"></script>
+        <script src="/www/external/kendoui.web/js/cultures/kendo.culture.sa-IN.min.js"></script>
+        <script src="/www/external/kendoui.web/js/cultures/kendo.culture.sa.min.js"></script>
+        <script src="/www/external/kendoui.web/js/cultures/kendo.culture.sah-RU.min.js"></script>
+        <script src="/www/external/kendoui.web/js/cultures/kendo.culture.sah.min.js"></script>
+        <script src="/www/external/kendoui.web/js/cultures/kendo.culture.se-FI.min.js"></script>
+        <script src="/www/external/kendoui.web/js/cultures/kendo.culture.se-NO.min.js"></script>
+        <script src="/www/external/kendoui.web/js/cultures/kendo.culture.se-SE.min.js"></script>
+        <script src="/www/external/kendoui.web/js/cultures/kendo.culture.se.min.js"></script>
+        <script src="/www/external/kendoui.web/js/cultures/kendo.culture.si-LK.min.js"></script>
+        <script src="/www/external/kendoui.web/js/cultures/kendo.culture.si.min.js"></script>
+        <script src="/www/external/kendoui.web/js/cultures/kendo.culture.sk-SK.min.js"></script>
+        <script src="/www/external/kendoui.web/js/cultures/kendo.culture.sk.min.js"></script>
+        <script src="/www/external/kendoui.web/js/cultures/kendo.culture.sl-SI.min.js"></script>
+        <script src="/www/external/kendoui.web/js/cultures/kendo.culture.sl.min.js"></script>
+        <script src="/www/external/kendoui.web/js/cultures/kendo.culture.sma-NO.min.js"></script>
+        <script src="/www/external/kendoui.web/js/cultures/kendo.culture.sma-SE.min.js"></script>
+        <script src="/www/external/kendoui.web/js/cultures/kendo.culture.sma.min.js"></script>
+        <script src="/www/external/kendoui.web/js/cultures/kendo.culture.smj-NO.min.js"></script>
+        <script src="/www/external/kendoui.web/js/cultures/kendo.culture.smj-SE.min.js"></script>
+        <script src="/www/external/kendoui.web/js/cultures/kendo.culture.smj.min.js"></script>
+        <script src="/www/external/kendoui.web/js/cultures/kendo.culture.smn-FI.min.js"></script>
+        <script src="/www/external/kendoui.web/js/cultures/kendo.culture.smn.min.js"></script>
+        <script src="/www/external/kendoui.web/js/cultures/kendo.culture.sms-FI.min.js"></script>
+        <script src="/www/external/kendoui.web/js/cultures/kendo.culture.sms.min.js"></script>
+        <script src="/www/external/kendoui.web/js/cultures/kendo.culture.sq-AL.min.js"></script>
+        <script src="/www/external/kendoui.web/js/cultures/kendo.culture.sq.min.js"></script>
+        <script src="/www/external/kendoui.web/js/cultures/kendo.culture.sr-Cyrl-BA.min.js"></script>
+        <script src="/www/external/kendoui.web/js/cultures/kendo.culture.sr-Cyrl-CS.min.js"></script>
+        <script src="/www/external/kendoui.web/js/cultures/kendo.culture.sr-Cyrl-ME.min.js"></script>
+        <script src="/www/external/kendoui.web/js/cultures/kendo.culture.sr-Cyrl-RS.min.js"></script>
+        <script src="/www/external/kendoui.web/js/cultures/kendo.culture.sr-Cyrl.min.js"></script>
+        <script src="/www/external/kendoui.web/js/cultures/kendo.culture.sr-Latn-BA.min.js"></script>
+        <script src="/www/external/kendoui.web/js/cultures/kendo.culture.sr-Latn-CS.min.js"></script>
+        <script src="/www/external/kendoui.web/js/cultures/kendo.culture.sr-Latn-ME.min.js"></script>
+        <script src="/www/external/kendoui.web/js/cultures/kendo.culture.sr-Latn-RS.min.js"></script>
+        <script src="/www/external/kendoui.web/js/cultures/kendo.culture.sr-Latn.min.js"></script>
+        <script src="/www/external/kendoui.web/js/cultures/kendo.culture.sr.min.js"></script>
+        <script src="/www/external/kendoui.web/js/cultures/kendo.culture.sv-FI.min.js"></script>
+        <script src="/www/external/kendoui.web/js/cultures/kendo.culture.sv-SE.min.js"></script>
+        <script src="/www/external/kendoui.web/js/cultures/kendo.culture.sv.min.js"></script>
+        <script src="/www/external/kendoui.web/js/cultures/kendo.culture.sw-KE.min.js"></script>
+        <script src="/www/external/kendoui.web/js/cultures/kendo.culture.sw.min.js"></script>
+        <script src="/www/external/kendoui.web/js/cultures/kendo.culture.syr-SY.min.js"></script>
+        <script src="/www/external/kendoui.web/js/cultures/kendo.culture.syr.min.js"></script>
+        <script src="/www/external/kendoui.web/js/cultures/kendo.culture.ta-IN.min.js"></script>
+        <script src="/www/external/kendoui.web/js/cultures/kendo.culture.ta.min.js"></script>
+        <script src="/www/external/kendoui.web/js/cultures/kendo.culture.te-IN.min.js"></script>
+        <script src="/www/external/kendoui.web/js/cultures/kendo.culture.te.min.js"></script>
+        <script src="/www/external/kendoui.web/js/cultures/kendo.culture.tg-Cyrl-TJ.min.js"></script>
+        <script src="/www/external/kendoui.web/js/cultures/kendo.culture.tg-Cyrl.min.js"></script>
+        <script src="/www/external/kendoui.web/js/cultures/kendo.culture.tg.min.js"></script>
+        <script src="/www/external/kendoui.web/js/cultures/kendo.culture.th-TH.min.js"></script>
+        <script src="/www/external/kendoui.web/js/cultures/kendo.culture.th.min.js"></script>
+        <script src="/www/external/kendoui.web/js/cultures/kendo.culture.tk-TM.min.js"></script>
+        <script src="/www/external/kendoui.web/js/cultures/kendo.culture.tk.min.js"></script>
+        <script src="/www/external/kendoui.web/js/cultures/kendo.culture.tn-ZA.min.js"></script>
+        <script src="/www/external/kendoui.web/js/cultures/kendo.culture.tn.min.js"></script>
+        <script src="/www/external/kendoui.web/js/cultures/kendo.culture.tr-TR.min.js"></script>
+        <script src="/www/external/kendoui.web/js/cultures/kendo.culture.tr.min.js"></script>
+        <script src="/www/external/kendoui.web/js/cultures/kendo.culture.tt-RU.min.js"></script>
+        <script src="/www/external/kendoui.web/js/cultures/kendo.culture.tt.min.js"></script>
+        <script src="/www/external/kendoui.web/js/cultures/kendo.culture.tzm-Latn-DZ.min.js"></script>
+        <script src="/www/external/kendoui.web/js/cultures/kendo.culture.tzm-Latn.min.js"></script>
+        <script src="/www/external/kendoui.web/js/cultures/kendo.culture.tzm.min.js"></script>
+        <script src="/www/external/kendoui.web/js/cultures/kendo.culture.ug-CN.min.js"></script>
+        <script src="/www/external/kendoui.web/js/cultures/kendo.culture.ug.min.js"></script>
+        <script src="/www/external/kendoui.web/js/cultures/kendo.culture.uk-UA.min.js"></script>
+        <script src="/www/external/kendoui.web/js/cultures/kendo.culture.uk.min.js"></script>
+        <script src="/www/external/kendoui.web/js/cultures/kendo.culture.ur-PK.min.js"></script>
+        <script src="/www/external/kendoui.web/js/cultures/kendo.culture.ur.min.js"></script>
+        <script src="/www/external/kendoui.web/js/cultures/kendo.culture.uz-Cyrl-UZ.min.js"></script>
+        <script src="/www/external/kendoui.web/js/cultures/kendo.culture.uz-Cyrl.min.js"></script>
+        <script src="/www/external/kendoui.web/js/cultures/kendo.culture.uz-Latn-UZ.min.js"></script>
+        <script src="/www/external/kendoui.web/js/cultures/kendo.culture.uz-Latn.min.js"></script>
+        <script src="/www/external/kendoui.web/js/cultures/kendo.culture.uz.min.js"></script>
+        <script src="/www/external/kendoui.web/js/cultures/kendo.culture.vi-VN.min.js"></script>
+        <script src="/www/external/kendoui.web/js/cultures/kendo.culture.vi.min.js"></script>
+        <script src="/www/external/kendoui.web/js/cultures/kendo.culture.wo-SN.min.js"></script>
+        <script src="/www/external/kendoui.web/js/cultures/kendo.culture.wo.min.js"></script>
+        <script src="/www/external/kendoui.web/js/cultures/kendo.culture.xh-ZA.min.js"></script>
+        <script src="/www/external/kendoui.web/js/cultures/kendo.culture.xh.min.js"></script>
+        <script src="/www/external/kendoui.web/js/cultures/kendo.culture.yo-NG.min.js"></script>
+        <script src="/www/external/kendoui.web/js/cultures/kendo.culture.yo.min.js"></script>
+        <script src="/www/external/kendoui.web/js/cultures/kendo.culture.zh-CHS.min.js"></script>
+        <script src="/www/external/kendoui.web/js/cultures/kendo.culture.zh-CHT.min.js"></script>
+        <script src="/www/external/kendoui.web/js/cultures/kendo.culture.zh-CN.min.js"></script>
+        <script src="/www/external/kendoui.web/js/cultures/kendo.culture.zh-HK.min.js"></script>
+        <script src="/www/external/kendoui.web/js/cultures/kendo.culture.zh-Hans.min.js"></script>
+        <script src="/www/external/kendoui.web/js/cultures/kendo.culture.zh-Hant.min.js"></script>
+        <script src="/www/external/kendoui.web/js/cultures/kendo.culture.zh-MO.min.js"></script>
+        <script src="/www/external/kendoui.web/js/cultures/kendo.culture.zh-SG.min.js"></script>
+        <script src="/www/external/kendoui.web/js/cultures/kendo.culture.zh-TW.min.js"></script>
+        <script src="/www/external/kendoui.web/js/cultures/kendo.culture.zh.min.js"></script>
+        <script src="/www/external/kendoui.web/js/cultures/kendo.culture.zu-ZA.min.js"></script>
+        <script src="/www/external/kendoui.web/js/cultures/kendo.culture.zu.min.js"></script>
+        <script src="/www/core/module.js"></script>
+        <script src="/www/homepage/module.js"></script>
+        <script src="/www/applications/devcenter/module.js"></script>
+        <script src="/www/applications/parasite/module.js"></script>
+        <script src="/www/applications/skeleton/module.js"></script>
+        <script src="/www/applications/utils/module.js"></script>
+        <script src="/www/applications/devcenter/plugins/module.js"></script>
+        <script src="/www/applications/general/plugins/module.js"></script>
+        <script src="/www/applications/parasite/plugins/module.js"></script>
+        <script src="/www/applications/skeleton/plugins/module.js"></script>
+        <script src="/www/core/applications_services.js"></script>
+        <script src="/www/core/dev_services.js"></script>
+        <script src="/www/core/login_services.js"></script>
+        <script src="/www/core/navigation_model.js"></script>
+        <script src="/www/core/navigation_services.js"></script>
+        <script src="/www/core/plugins_services.js"></script>
+        <script src="/www/core/search_services.js"></script>
+        <script src="/www/core/url_services.js"></script>
+        <script src="/www/homepage/controllers.js"></script>
+        <script src="/www/homepage/directives.js"></script>
+        <script src="/www/homepage/search.js"></script>
+        <script src="/www/applications/parasite/app.js"></script>
+        <script src="/www/applications/skeleton/app.js"></script>
+        <script src="/www/applications/utils/controllers.js"></script>
+        <script src="/www/applications/utils/directives.js"></script>
+        <script src="/www/applications/utils/filters.js"></script>
+        <script src="/www/applications/utils/plugins.js"></script>
+        <script src="/www/applications/devcenter/app.js"></script>
+        <script src="/www/applications/utils/pie/directives_pie.js"></script>
+        <script src="/www/applications/devcenter/plugins/slide/devcenter_controllers.js"></script>
+        <script src="/www/applications/devcenter/plugins/slide/devcenter_directives.js"></script>
+        <script src="/www/applications/devcenter/plugins/slide/plugin.js"></script>
+        <script src="/www/applications/general/plugins/circles/circles_controllers.js"></script>
+        <script src="/www/applications/general/plugins/circles/plugin.js"></script>
+        <script src="/www/applications/general/plugins/tree/plugin.js"></script>
+        <script src="/www/applications/general/plugins/tree/tree_controllers.js"></script>
+        <script src="/www/applications/general/plugins/table/pagination_controllers.js"></script>
+        <script src="/www/applications/general/plugins/table/plugin.js"></script>
+        <script src="/www/applications/parasite/plugins/showcase/plugin.js"></script>
+        <script src="/www/applications/parasite/plugins/showcase/showcase_controllers.js"></script>
+        <script src="/www/applications/parasite/plugins/welcome/plugin.js"></script>
+        <script src="/www/applications/parasite/plugins/thumbnails/plugin.js"></script>
+        <script src="/www/applications/parasite/plugins/thumbnails/thumbnails_controllers.js"></script>
+        <script src="/www/applications/skeleton/plugins/content/content_controllers.js"></script>
+        <script src="/www/applications/skeleton/plugins/content/plugin.js"></script>
+        <script src="/www/applications/skeleton/plugins/navigation/navigation_controllers.js"></script>
+        <script src="/www/applications/skeleton/plugins/navigation/plugin.js"></script>
+        <!-- endinject -->
+
+        <!-- inject:dev:js -->
+        <script src="/www/build/dev_mode.js"></script>
+        <!-- endinject -->
+	</head>
+
+	<body>
+		<div ng-controller="ApplicationsCtrl">
+			<div class="navbar">
+				<div ng-controller="SearchCtrl"
+                     ng-show="searchSupported || login.isLoginSupported()"
+                     class="navbar-inner">
+					<div class="container-fluid">
+
+						<a class="brand" href="#">{{ currentApplication().name }}</a>
+
+						<form ng-show="searchSupported"
+							  class="navbar-search form-search"
+							  ng-submit="search()">
+							<div class="input-append">
+								<input type="hidden"
+                                       id="select2-search-options"
+                                       ui-select2="select2Options"
+                                       multiple
+                                       ng-model="searchInput"
+                                       data-placeholder="Filter...">
+                                </input>
+
+                                <button type="submit" class="btn" para-loading-button="searching()" icon="icon-spinner">
+                                    <i class="icon-search"></i> Search
+                                </button>
+							</div>
+						</form>
+
+
+						<div ng-controller="LoginCtrl"
+                             ng-if="login.isLoginSupported()"
+                             class="navbar-text pull-right">
+                            {{ greetingPrefix }}<a href="#" ng-click="login.promptLogin()">{{ login.user() || "you" }}</a>{{ greetingSuffix }}
+						</div>
+					</div>
+				</div>
+			</div>
+
+			<div class="container-fluid body">
+
+				<div class="row-fluid" ng-if="currentApplication().isNavigationLinkedToUrl()">
+					<ul class="breadcrumb" ng-controller="BreadcrumbCtrl">
+						<li ng-repeat="crumb in breadcrumbs"
+							ng-class="$last ? 'active' : ''">
+
+							<span class="divider">
+								/
+							</span>
+							<a href="" ng-show="! $last" ng-click="currentNavigationNode(crumb)">
+								{{ crumb.name }}
+							</a>
+							<span ng-show="$last">
+								{{ crumb.name }}
+							</span>
+
+						</li>
+					</ul>
+				</div>
+
+
+			    <div class="row-fluid">
+		    		<p class="navbar-text" style="text-align: center;">
+                        <ul class="nav nav-pills pull-left"
+                            ng-style="navigationPluginConfs().length <= 1 ? {visibility : 'hidden'} : {}">
+                            <li ng-class="{'active' : p == currentNavigationPluginConf()}"
+                                ng-repeat="p in navigationPluginConfs()"
+                                ng-controller="PluginLinkCtrl">
+
+                                <a href="#"
+                                   ng-click="currentNavigationPluginConf(p)">
+                                    <span ng-bind-html="repr" />
+                                </a>
+
+                            </li>
+                        </ul>
+
+                        <ul class="span6 nav nav-pills pull-right">
+                            <li class="pull-right">
+                                <button type="button"
+                                        para-tooltip="hide content"
+                                        class="close"
+                                        style="padding-top: 5px"
+                                        ng-style="currentContentPluginConf() == null ? {visibility : 'hidden'} : {}"
+                                        ng-click="currentContentPluginConf(null)">
+                                    <span class="icon-remove"></span>
+                                </button>
+                            </li>
+
+                            <li ng-class="{'active' : p == currentContentPluginConf()}"
+                                ng-style="contentPluginConfs().length <= 1 ? {visibility : 'hidden'} : {}"
+                                class="pull-right"
+                                ng-repeat="p in contentPluginConfs()"
+                                ng-controller="PluginLinkCtrl">
+
+                                <a href="#"
+                                   ng-click="currentContentPluginConf(p)">
+                                    <span ng-bind-html="repr" />
+                                </a>
+
+                            </li>
+                        </ul>
+		    		</p>
+			    </div>
+
+                <div kendo-splitter
+                     k-panes="[{collapsible: false, scrollable: false}, {collapsible: true, scrollable: false}]"
+                     para-plugin-canvas-container
+                     show-content="currentContentPluginConf() != null">
+                    <para-plugin-canvas class="navigation-plugin">
+                        <div class="plugin-loading-spinner"
+                             ng-class="{'plugin-loading' : navigationPluginLoading(), 'plugin-loading-failed' : navigationPluginLoadingFailed()}">
+                            <span></span>
+                            <span></span>
+                            <span></span>
+                            <br />
+                            <div ng-if="navigationPluginLoadingFailed()" class="label label-inverse">
+                                The dwarf in charge for fetching your data is on break.
+                                <br />
+                                Try again later.
+                            </div>
+                        </div>
+                        <div class="plugin"
+                             ng-class="{'plugin-loading' : navigationPluginLoading() || navigationPluginLoadingFailed()}"
+                             ng-include="navigationPluginTemplate"
+                             onload="currentNavigationPluginConf().onload()"></div>
+                    </para-plugin-canvas>
+                    <para-plugin-canvas class="content-plugin">
+                        <div class="plugin-loading-spinner"
+                             ng-class="{'plugin-loading' : contentPluginLoading(), 'plugin-loading-failed' : contentPluginLoadingFailed()}">
+                            <span></span>
+                            <span></span>
+                            <span></span>
+                            <br />
+                            <div ng-if="contentPluginLoadingFailed()" class="label label-inverse">
+                                The dwarf in charge for fetching your data is on break.
+                                <br />
+                                Try again later.
+                            </div>
+                        </div>
+                        <div class="plugin"
+                             ng-class="{'plugin-loading' : contentPluginLoading() || contentPluginLoadingFailed()}"
+                             ng-include="contentPluginTemplate"
+                             onload="currentContentPluginConf().onload()"></div>
+                    </para-plugin-canvas>
+                </div>
+            </div>
+
+		</div>
+	</body>
+</html>

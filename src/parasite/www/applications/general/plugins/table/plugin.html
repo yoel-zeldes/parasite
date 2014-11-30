@@ -1,0 +1,15 @@
+<span ng-controller="NodesPaginationCtrl">
+    <div ng-controller="TableNavigationCtrl"
+         id="tree"
+         para-scrollbar
+         para-stretch
+         ng-keydown="navigate($event)"
+         tabindex="1"
+         style="outline: none">
+	</div>
+	
+	<span>
+	    <para-pagination window="8" pages="{{ pages }}" current="current">
+	    </para-pagination>
+	</span>
+</span>

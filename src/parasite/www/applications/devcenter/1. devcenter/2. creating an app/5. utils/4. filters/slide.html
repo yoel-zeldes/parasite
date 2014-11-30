@@ -1,0 +1,51 @@
+<p>
+    The utils library contains some basic angular filters.
+</p>
+<p>
+    Although they are very simple, it's encouraged to use them whenever possible, as they give a unified UX with predefined conventions
+    (e.g. if your application needs to display a date, the parseDate filter should be used, as it uses a format used through all of the applications, and it gives a unified UX).
+</p>
+<p>
+    The following filters are provided:
+</p>
+<dl>
+    <dt>
+        parseDate
+    </dt>
+    <dd>
+        <p>
+            This filter gets an integer of the number of seconds (as opposed to the number of milliseconds which the angular date filter expects).
+            <br/>
+            If given undefined or null, the result is "-".
+        </p>
+    </dd>
+
+    <dt>
+        roundFloat
+    </dt>
+    <dd>
+        <p>
+            This filter gets a float and gets rid of all of the digits right to the decimal dot except for two.
+            <br/>
+            This filter should be used whenever displaying float numbers to the user, while their exact value isn't important (e.g. - if you want to display the value of pi, don't use this filter).
+        </p>
+    </dd>
+
+    <dt>
+        percents
+    </dt>
+    <dd>
+        <p>
+            This filter is the same as the roundFilter, except it returns a string followed by "%".
+        </p>
+    </dd>
+
+    <dt>
+        titleCase
+    </dt>
+    <dd>
+        <p>
+            This filter gets a string and capitalizes the first letter of every word.
+        </p>
+    </dd>
+</dl>

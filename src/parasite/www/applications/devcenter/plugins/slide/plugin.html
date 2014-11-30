@@ -1,0 +1,17 @@
+<span ng-controller="DevcenterCtrl">
+    <div para-scrollbar para-stretch>
+        <h1>
+            {{ currentNavigationNode().name | titleCase }}
+        </h1>
+        <div ng-include="item"></div>
+    </div>
+
+    <ul class="pager">
+        <li class="previous">
+            <a href="#" ng-if="prevSlide != undefined" ng-click="currentNavigationNode(prevSlide)">&larr; prev</a>
+        </li>
+        <li class="next">
+            <a href="#" ng-if="nextSlide != undefined" ng-click="currentNavigationNode(nextSlide)">next &rarr;</a>
+        </li>
+    </ul>
+</span>

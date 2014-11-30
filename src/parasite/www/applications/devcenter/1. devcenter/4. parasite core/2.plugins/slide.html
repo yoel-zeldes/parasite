@@ -1,0 +1,40 @@
+<p>
+    The <code>plugins_services.js</code> file provides the <code>Plugins</code> provider.
+    This provider is used both at config time in order to create new plugins,
+    and in run time in order to access the plugins.
+</p>
+<dl>
+    <dt>
+        config
+    </dt>
+    <dd>
+        The <code>Plugins</code> provider should be injected (using angular DI) to a <code>config</code> block, or to other providers.
+        The provider has two properties:
+        <ul>
+            <li>
+                <code>NavigationPlugin</code>: this "class" (using the <code>class.js</code> package) is the base class used to create new navigation plugins.
+                You should refer to <dev-a dev-ref="/creating an app/the plugins">the plugins</dev-a> section in order to learn about this object.
+            </li>
+            <li>
+                <code>ContentPlugin</code>: this "class" is the base class used to create new content plugins.
+            </li>
+        </ul>
+    </dd>
+
+    <dt>
+        run
+    </dt>
+    <dd>
+        <p>
+            Once angular enters the run phase, the <code>Plugins</code> provider binds each plugin configuration (defined on the application objects) to its matching plugin object.
+            This is done by matching the plugin configuration's <code>pluginId</code> to the plugin's <code>id</code>.
+        </p>
+        <p>
+            Once a match is found, the plugin configuration object gets a <code>plugin</code> property holding the plugin, and <code>canHandle</code> property which is the plugin's <code>canHandle</code> function (unless the plugin configuration has defined the function by itself).
+        </p>
+        <p>
+            The <code>Plugins</code> provider should be injected (using angular DI) to a <code>run</code> block, or to other services.
+            The provider has several properties, all of which are documented in the service code itself.
+        </p>
+    </dd>
+</dl>

@@ -1,0 +1,23 @@
+<p>
+    The production parasite server uses supervisord in order to keep some daemons which are essential for the parasite site up and running.
+</p>
+<p>
+    Use <code>sudo service supervisord start</code> in order to start it in case the server restarts (note: running <code>sudo /etc/init.d/supervisord start</code> won't work).
+</p>
+<p>
+    The supervisord's configuration file is located at <code>/etc/supervisord.conf</code>.
+</p>
+<p>
+    supervisord makes sure the following are up and running in all times:
+    <ul>
+        <li>
+            <strong>parasite</strong>: this daemon runs the <code>init_site.py</code> script (located in the src directory).
+            This script runs code registered by all of the applications which should run only once (and not once per httpd process) - read more about it at <dev-a dev-ref="/creating an app/server side/application initialization">application initialization</dev-a>.
+        </li>
+    </ul>
+</p>
+<p>
+    If there are problems with some daemon, you can use supervisorctl to debug them, e.g. - <code>supervisorctl tail -3000 parasite stderr</code>.
+    <br />
+    Many times, a good old restart will solve the problem: <code>supervisorctl restart parasite</code>.
+</p>
