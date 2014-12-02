@@ -4,19 +4,40 @@
 
 var join = require('path').join;
     
+function getFiles(relativeToBower, relativeToCurrentDir) {
+    return relativeToBower.map(function(path) {
+        return '../../src/parasite/www/external/bower_components/' + path;
+    }).concat(relativeToCurrentDir).concat(['!../../src/**/build/**']);
+}
+var js = getFiles([
+    'jquery/jquery.min.js',
+    'angular/angular.js',
+    'angular-resource/angular-resource.js',
+    'angular-animate/angular-animate.js',
+    'select2/select2.js',
+    'angular-ui-select2/src/select2.js',
+    'd3/d3.js',
+    'd3-tip/index.js',
+    'kendo-ui/js/kendo.ui.core.min.js',
+    'angular-kendo/angular-kendo.js',
+    'bootstrap/docs/assets/js/bootstrap.min.js',
+    'angular-bootstrap/ui-bootstrap.js'
+],
+[
+    '../../src/parasite/www/external/class/class.js',
+    '../../src/parasite/www/!(external)/**/module.js',
+    '../../src/parasite/www/!(external)/**/*.js',
+]);
 
-var js = [
-    '../../src/**/jquery.min.js',
-    '../../src/**/angular.js',
-    '../../src/**/kendo.web.min.js',
-    '../../src/**/d3/*.js',
-    '../../src/**/d3-tip/*.js',
-    '../../src/**/external/**/*.js',
-    '../../src/**/module.js',
-    '../../src/**/*.js',
-    '!../../src/**/build/**',
-    '!../../src/**/angular-mocks.js'
-];
+var css = getFiles([
+    'select2/select2.css',
+    'select2/select2-bootstrap.css',
+    'bootstrap/docs/assets/css/bootstrap.css',
+    'kendo-ui/styles/web/kendo.common.core.min.css'
+],
+[
+    '../../src/parasite/www/!(external)/**/*.css'
+]);
 
 module.exports = {
 	/**
@@ -40,10 +61,7 @@ module.exports = {
             '!../../src/**/build/**'
         ],
         index: '../../src/parasite/www/homepage/index.html',
-        css: [
-            '../../src/**/*.css',
-            '!../../src/**/build/**'
-        ],
+        css: css,
         fonts: [
             '../../src/parasite/www/external/fontawesome/**/fontawesome-webfont.woff',
             '../../src/parasite/www/external/fontawesome/**/fontawesome-webfont.ttf'
