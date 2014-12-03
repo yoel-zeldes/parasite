@@ -14,23 +14,32 @@ module.exports = function(config) {
 
     // list of files / patterns to load in the browser
     files: [
-        './tests/bind.shim.js',
-
-        './src/**/jquery.min.js',
-        './src/**/angular.js',
-        './src/**/angular-mocks.js',
-        './src/**/external/**/d3.v3.js',
-        './src/**/kendo.web.min.js',
-        './src/**/external/**/*.js',
-
-        './src/**/module.js',
+	'jquery/jquery.min.js',
+        'angular/angular.js',
+        'angular-mocks/angular-mocks.js',
+        'angular-resource/angular-resource.js',
+        'angular-animate/angular-animate.js',
+	'select2/select2.js',
+	'angular-ui-select2/src/select2.js',
+	'd3/d3.js',
+	'd3-tip/index.js',
+	'kendo-ui/js/kendo.ui.core.min.js',
+	'angular-kendo/angular-kendo.js',
+	'bootstrap/docs/assets/js/bootstrap.min.js',
+	'angular-bootstrap/ui-bootstrap.js'
+    ].map(function(path) {
+        return './src/parasite/www/external/bower_components/' + path;
+    }).concat([
+	'./tests/bind.shim.js',
+	'./src/parasite/www/external/class/class.js',
+	'./src/parasite/www/!(external)/**/module.js',
         './prod_mode.js',
-        './src/**/core/**/*.js',
-        './src/**/utils/**/*.js',
-        './src/**/*.js',
+	'./src/parasite/www/core/**/*.js',
+	'./src/parasite/www/applications/utils/**/*.js',
+	'./src/parasite/www/!(external)/**/*.js',
 
         './tests/**/*.js'
-    ],
+    ]),
 
 
     // list of files to exclude

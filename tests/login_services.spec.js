@@ -26,18 +26,18 @@ describe('login service', function () {
         expect(login.user()).toBe(userName);
     });
 
-    it("user get work with promises", function () {
+    it("user get works with promises", function () {
         var userName = 'someone';
-        spyOn($modal, 'open').andReturn({ result  : $q.when(userName) });
+        spyOn($modal, 'open').and.returnValue({ result  : $q.when(userName) });
         $rootScope.$apply(function() {
             login.user(true).then(function(u) {
                 expect(u).toBe(userName);
-                expect($modal.open.callCount).toBe(1);
+                expect($modal.open.calls.count()).toBe(1);
 
                 // Tests again the same thing (this time, the prompt shouldn't get called):
                 login.user(true).then(function(u) {
                     expect(u).toBe(userName);
-                    expect($modal.open.callCount).toBe(1);
+                    expect($modal.open.calls.count()).toBe(1);
                 });
             });
         });
