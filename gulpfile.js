@@ -108,7 +108,7 @@ gulp.task('dev-server', ['dev'], function () {
         if (parasiteServer != null) {
             parasiteServer.kill();
         }
-        parasiteServer = child_process.exec('c:\Python27\python.exe ./src/parasite.wsgi');
+        parasiteServer = child_process.exec('python ./src/parasite.wsgi');
     }
 
     process.on('SIGINT', function() {
