@@ -26,9 +26,6 @@ angular.module("general.plugins")
 		self.treeLayout = d3.layout.tree().size([0, 0])
 		.children(function(d) {
 			return self.tree(d).isExpanded ? d.kids : [];
-		})
-		.sort(function(a, b) {
-			return a.name.localeCompare(b.name);
 		});
 
 		self.svg = d3.select("#tree")
