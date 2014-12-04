@@ -1,3 +1,5 @@
 src/parasite/www/external/bower_components/
 node_modules/
 src/parasite/www/build/
+*.pyc
+.idea

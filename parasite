@@ -1,30 +1,30 @@
 #!/bin/sh
 
 if [[ $1 == "--help" || $1 == "" ]]; then
-    echo -e "Usage: parasite action"
-    echo -e "Perform the given action using the Gulp build system."
-    echo -e "Example: parasite dev\n"
-    echo -e "Available actions:"
-    echo -e "   prod \t Enter production mode: build necessary files into"
-    echo -e "   \t\t www/build in a manner suitable for production"
-    echo -e "   \t\t (e.g - concat js files)."
-    echo -e "   dev \t\t Enter development mode: build necessary files into"
-    echo -e "   \t\t www/build dir, and enter watch mode (when files change,"
-    echo -e "   \t\t the build process is reinitialized)."
-    echo -e "   dev-server \t Extends dev, and starts the server"
-    echo -e "   \t\t (runs the parasite.wsgi script)."
-    echo -e "   \t\t This option is suitable for cases where you don't want"
-    echo -e "   \t\t to debug the server side code (as you can't insert"
-    echo -e "   \t\t breakpoints)."
-    echo -e "   \t\t However, if you do write server side code,"
-    echo -e "   \t\t Gulp will watch for changes and restart the server"
-    echo -e "   \t\t so the updated version of the files will be used."
-    echo -e "   test \t Run all the karma tests."
-    echo -e "   test-dev \t Run all the karma tests after building the site."
+    echo "Usage: parasite action"
+    echo "Perform the given action using the Gulp build system."
+    echo "Example: parasite dev\n"
+    echo "Available actions:"
+    echo "   prod \t Enter production mode: build necessary files into"
+    echo "   \t\t www/build in a manner suitable for production"
+    echo "   \t\t (e.g - concat js files)."
+    echo "   dev \t\t Enter development mode: build necessary files into"
+    echo "   \t\t www/build dir, and enter watch mode (when files change,"
+    echo "   \t\t the build process is reinitialized)."
+    echo "   dev-server \t Extends dev, and starts the server"
+    echo "   \t\t (runs the parasite.wsgi script)."
+    echo "   \t\t This option is suitable for cases where you don't want"
+    echo "   \t\t to debug the server side code (as you can't insert"
+    echo "   \t\t breakpoints)."
+    echo "   \t\t However, if you do write server side code,"
+    echo "   \t\t Gulp will watch for changes and restart the server"
+    echo "   \t\t so the updated version of the files will be used."
+    echo "   test \t Run all the karma tests."
+    echo "   test-dev \t Run all the karma tests after building the site."
 
     exit
 fi
 
 basedir=`dirname "$0"`
 
-$basedir/node/gulp/npm/gulp --gulpfile $basedir/node/gulp/gulpfile.js $1
+$basedir/node_modules/gulp/bin/gulp.js --gulpfile $basedir/gulpfile.js $1
