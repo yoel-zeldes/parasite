@@ -12,6 +12,8 @@ Parasite will do the rest for you - it'll manage the state of your SPA, do the l
 
 **Note**: feel free to contribute to the Parasite framework - either by implementing additional navigation/content plugins, or by extending the framework itself.
 
+**Another note**: parasite web applications are best viewd using chrome.
+
 ## Getting started
 
 - Run git clone https://github.com/yoel-zeldes/parasite.git
