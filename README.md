@@ -22,8 +22,8 @@ Parasite will do the rest for you - it'll manage the state of your SPA, do the l
 - Download and install [flask](http://pypi.python.org/packages/source/F/Flask/Flask-0.10.1.tar.gz) for python.
 - Run npm install
 - Run bower install
-- Run the server side using cd src; python parasite.wdgi, or just run it using your favorite IDE.
+- Run the server side using cd src; python parasite.wsgi, or just run it using your favorite IDE.
 - Run the parasite script for starting developing (parasite dev) or for production (parasite prod).
-- If in development mode, go to the [devcenter](http://127.0.0.1:8000/app/devcenter) at to learn more.
+- If in development mode, go to the [devcenter](http://127.0.0.1:8000/app/devcenter) to learn more.
 
 Parasite is free software/open source, and is distributed under the [MIT](http://opensource.org/licenses/MIT).
